@@ -1,0 +1,30 @@
+Package: speedtest
+Type: Package
+Title: speedtest title goes here otherwise CRAN checks fail
+Version: 0.1.0
+Date: 2017-11-09
+Authors@R: c(
+    person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
+           comment = c(ORCID = "0000-0001-5670-2640"))
+  )
+Author: Bob Rudis (bob@rud.is)
+Maintainer: Bob Rudis <bob@rud.is>
+Description: A good description goes here otherwise CRAN checks fail.
+URL: https://github.com/hrbrmstr/speedtest
+BugReports: https://github.com/hrbrmstr/speedtest/issues
+License: AGPL
+Suggests:
+    testthat,
+    covr
+Depends:
+    R (>= 3.2.0)
+Imports:
+    curl,
+    purrr,
+    dplyr,
+    xml2,
+    utils,
+    pingr,
+    urltools,
+    jsonlite
+RoxygenNote: 6.0.1

@@ -1,0 +1,1 @@
+sGET <- purrr::safely(httr::GET)

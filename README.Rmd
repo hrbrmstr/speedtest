@@ -1,0 +1,32 @@
+---
+output: rmarkdown::github_document
+---
+
+# speedtest
+
+## Description
+
+## What's Inside The Tin
+
+The following functions are implemented:
+
+## Installation
+
+```{r eval=FALSE}
+devtools::install_github("hrbrmstr/speedtest")
+```
+
+```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
+options(width=120)
+```
+
+## Usage
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+library(speedtest)
+
+# current verison
+packageVersion("speedtest")
+
+```
+
