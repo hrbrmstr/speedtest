@@ -4,9 +4,13 @@
 \name{speedtest}
 \alias{speedtest}
 \alias{speedtest-package}
-\title{...}
+\title{Tools to Test and Compare Internet Bandwidth Speeds}
 \description{
-...
+The 'Ookla' 'Speedtest' site \url{http://beta.speedtest.net/about} provides
+interactive and programmatic services to test and compare bandwidth speeds
+from  a source node on the Internet to thousands of test servers. Tools are
+provided to obtain test server lists, identify target servers for testing and
+performing speed/bandwidth tests.
 }
 \author{
 Bob Rudis (bob@rud.is)

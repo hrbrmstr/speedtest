@@ -1,6 +1,4 @@
-#' #' Find "closest" servers (geography-wise) from master server list
-#'
-#' Uses [ipinfo.io](https://ipinfo.io) to geolocate your external IP address.
+#' Find "closest" servers (geography-wise) from master server list
 #'
 #' @md
 #' @param servers if not `NULL`, then the data frame from [spd_servers()]. If
@@ -9,6 +7,9 @@
 #'        will be retrieved
 #' @return server list in order of geographic closeness
 #' @export
+#' @examples \dontrun{
+#' spd_closest_servers()
+#' }
 spd_closest_servers <- function(servers=NULL, config=NULL) {
 
   if (is.null(config)) config <- spd_config()

@@ -1,21 +1,31 @@
 #' Find "best" servers (latency-wise) from master server list
 #'
+#' The input `servers` data frame will be truncatred to the first `max` and
+#' HTTP and ICMP probe tests will be performed to determine initial retrieval
+#' speed and latency. Not all servers respond to ICMP requests due to the way
+#' their routers, switches or firewalls are configured.
+#'
 #' @md
 #' @param servers if not `NULL`, then the data frame from [spd_servers()]. If
 #'        `NULL`, then [spd_servers()] will be called to retrieve the server list.
 #' @param config client configuration retrieved via [spd_config()]. If `NULL` it
 #'        will be retrieved
+#' @param max the maximum numbers of "best" servers to return. This is hard-capped
+#'        at 25 since Oookla is a free/sponsored service and if you plan on abusing
+#'        it you'll have to write your own code to do so. Default is `10`.
 #' @return server list in order of latency closeness (retrieval speed column included)
-#' @note the list of target servers will be truncated to the first 10
+#' @note the list of target servers will be truncated to the first `max`. `max` may
+#'       amount may not be returned if there were errors connecting to servers.
 #' @export
-spd_best_servers <- function(servers=NULL, config=NULL) {
+spd_best_servers <- function(servers=NULL, config=NULL, max=10) {
 
+  if (max > 25) max <- 25
   if (is.null(config)) config <- spd_config()
   if (is.null(servers)) servers <- spd_closest_servers(config=config)
 
   targets <- servers
 
-  if (nrow(targets) > 10) targets <- servers[1:10,]
+  if (nrow(targets) > max) targets <- servers[1:max,]
 
   .lat_dat <- list()
 
@@ -40,9 +50,6 @@ spd_best_servers <- function(servers=NULL, config=NULL) {
     )
   }) %>%
   dplyr::filter(!grepl("test=test", retrieval_time)) -> target_df
-
-  # order() is kinda not necessary since the first ones to finish are going to be
-  # in the list first, but it's best to be safe
 
   dplyr::left_join(target_df, targets, "latency_url") %>%
     dplyr::arrange(retrieval_time) %>%

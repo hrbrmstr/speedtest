@@ -1,9 +1,14 @@
 #' Retrieve a list of SpeedTest servers
 #'
+#' @md
 #' @param config client configuration retrieved via [spd_config()]. If `NULL` it
 #'        will be retrieved
 #' @return data frame
 #' @export
+#' @examples \dontrun{
+#' config <- spd_config()
+#' spd_servers(config)
+#' }
 spd_servers <- function(config=NULL) {
 
   res <- httr::GET("https://www.speedtest.net/speedtest-servers-static.php")

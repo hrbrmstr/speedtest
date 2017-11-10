@@ -9,3 +9,8 @@ spd_config()
 \description{
 Retrieve client configuration information for the speedtest
 }
+\examples{
+\dontrun{
+spd_config()
+}
+}
