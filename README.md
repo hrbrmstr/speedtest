@@ -1,5 +1,5 @@
-
-# speedtest
+speedtest
+================
 
 Tools to Test and Compare Internet Bandwidth Speeds
 
@@ -96,11 +96,11 @@ glimpse(spd_download_test(closest_servers[1,], config=config))
     ## $ id      <chr> "5960"
     ## $ host    <chr> "speed0.xcelx.net:8080"
     ## $ url2    <chr> "http://speed1.xcelx.net/speedtest/upload.php"
-    ## $ min     <dbl> 5.671018
-    ## $ mean    <dbl> 71.27867
-    ## $ median  <dbl> 72.00746
-    ## $ max     <dbl> 133.4231
-    ## $ sd      <dbl> 47.95157
+    ## $ min     <dbl> 15.92743
+    ## $ mean    <dbl> 65.83586
+    ## $ median  <dbl> 67.77901
+    ## $ max     <dbl> 118.1172
+    ## $ sd      <dbl> 36.07819
 
 ``` r
 glimpse(spd_download_test(only_the_best_severs[1,], config=config))
@@ -108,24 +108,24 @@ glimpse(spd_download_test(only_the_best_severs[1,], config=config))
 
     ## Observations: 1
     ## Variables: 18
-    ## $ ping_time      <dbl> 0.02910433
-    ## $ total_time     <dbl> 0.093134
-    ## $ retrieval_time <dbl> 1.7e-05
-    ## $ url            <chr> "http://speedtest-server.starry.com/speedtest/upload.php"
-    ## $ lat            <dbl> 42.3578
-    ## $ lng            <dbl> -71.0617
-    ## $ name           <chr> "Boston, MA"
+    ## $ ping_time      <dbl> 0.024089
+    ## $ total_time     <dbl> 0.058561
+    ## $ retrieval_time <dbl> 1.6e-05
+    ## $ url            <chr> "http://speedtest.rd.ri.cox.net/speedtest/upload.php"
+    ## $ lat            <dbl> 41.8239
+    ## $ lng            <dbl> -71.4128
+    ## $ name           <chr> "Providence, RI"
     ## $ country        <chr> "United States"
     ## $ cc             <chr> "US"
-    ## $ sponsor        <chr> "Starry, Inc."
-    ## $ id             <chr> "13429"
-    ## $ host           <chr> "speedtest-server.starry.com:8080"
+    ## $ sponsor        <chr> "CCI - New England"
+    ## $ id             <chr> "13112"
+    ## $ host           <chr> "speedtest.rd.ri.cox.net:8080"
     ## $ url2           <chr> NA
-    ## $ min            <dbl> 31.08852
-    ## $ mean           <dbl> 134.1854
-    ## $ median         <dbl> 142.0293
-    ## $ max            <dbl> 173.0955
-    ## $ sd             <dbl> 42.58488
+    ## $ min            <dbl> 14.09239
+    ## $ mean           <dbl> 114.3066
+    ## $ median         <dbl> 139.4555
+    ## $ max            <dbl> 174.8312
+    ## $ sd             <dbl> 62.50051
 
 ### Individual download tests
 
@@ -135,24 +135,24 @@ glimpse(spd_upload_test(only_the_best_severs[1,], config=config))
 
     ## Observations: 1
     ## Variables: 18
-    ## $ ping_time      <dbl> 0.02910433
-    ## $ total_time     <dbl> 0.093134
-    ## $ retrieval_time <dbl> 1.7e-05
-    ## $ url            <chr> "http://speedtest-server.starry.com/speedtest/upload.php"
-    ## $ lat            <dbl> 42.3578
-    ## $ lng            <dbl> -71.0617
-    ## $ name           <chr> "Boston, MA"
+    ## $ ping_time      <dbl> 0.024089
+    ## $ total_time     <dbl> 0.058561
+    ## $ retrieval_time <dbl> 1.6e-05
+    ## $ url            <chr> "http://speedtest.rd.ri.cox.net/speedtest/upload.php"
+    ## $ lat            <dbl> 41.8239
+    ## $ lng            <dbl> -71.4128
+    ## $ name           <chr> "Providence, RI"
     ## $ country        <chr> "United States"
     ## $ cc             <chr> "US"
-    ## $ sponsor        <chr> "Starry, Inc."
-    ## $ id             <chr> "13429"
-    ## $ host           <chr> "speedtest-server.starry.com:8080"
+    ## $ sponsor        <chr> "CCI - New England"
+    ## $ id             <chr> "13112"
+    ## $ host           <chr> "speedtest.rd.ri.cox.net:8080"
     ## $ url2           <chr> NA
-    ## $ min            <dbl> 7.054743
-    ## $ mean           <dbl> 8.8183
-    ## $ median         <dbl> 9.03289
-    ## $ max            <dbl> 10.12358
-    ## $ sd             <dbl> 1.111036
+    ## $ min            <dbl> 6.985803
+    ## $ mean           <dbl> 11.33656
+    ## $ median         <dbl> 11.75769
+    ## $ max            <dbl> 14.52611
+    ## $ sd             <dbl> 2.583892
 
 ``` r
 glimpse(spd_upload_test(closest_servers[1,], config=config))
@@ -170,11 +170,11 @@ glimpse(spd_upload_test(closest_servers[1,], config=config))
     ## $ id      <chr> "5960"
     ## $ host    <chr> "speed0.xcelx.net:8080"
     ## $ url2    <chr> "http://speed1.xcelx.net/speedtest/upload.php"
-    ## $ min     <dbl> 3.069397
-    ## $ mean    <dbl> 6.548148
-    ## $ median  <dbl> 5.442284
-    ## $ max     <dbl> 11.43088
-    ## $ sd      <dbl> 3.068128
+    ## $ min     <dbl> 7.742794
+    ## $ mean    <dbl> 10.65315
+    ## $ median  <dbl> 11.00138
+    ## $ max     <dbl> 12.99699
+    ## $ sd      <dbl> 2.089331
 
 ### Moar download tests
 
@@ -213,9 +213,9 @@ select(to_compare, sponsor, name, country, host, type)
     ## 1 Axcelx Technologies LLC  Somerville, MA United States                       speed0.xcelx.net:8080 closest
     ## 2                 Comcast      Boston, MA United States         stosat-ndhm-01.sys.comcast.net:8080 closest
     ## 3            Starry, Inc.      Boston, MA United States            speedtest-server.starry.com:8080 closest
-    ## 4            Starry, Inc.      Boston, MA United States            speedtest-server.starry.com:8080    best
-    ## 5       Dartmouth College     Hanover, NH United States           perfsonar-test.dartmouth.edu:8080    best
-    ## 6                 vzalpha     Waltham, MA United States                 pdi-ookla2.vzalpha.com:8080    best
+    ## 4                 Comcast      Boston, MA United States         stosat-ndhm-01.sys.comcast.net:8080    best
+    ## 5       CCI - New England  Providence, RI United States                speedtest.rd.ri.cox.net:8080    best
+    ## 6         Oxford Networks    Lewiston, ME United States                 sp1.oxfordnetworks.com:8080    best
     ## 7                 PirxNet         Gliwice        Poland                             st.pirx.pl:8080  random
     ## 8          Atlantic Metro Los Angeles, CA United States losangeles-speedtest.atlanticmetro.net:8080  random
     ## 9                   UNPAD         Bandung     Indonesia                        st1.unpad.ac.id:8080  random
