@@ -94,7 +94,7 @@ glimpse(spd_upload_test(closest_servers[1,], config=config))
 
 Choose closest, "best" and randomly (there can be, and are, some dups as a result for best/closest), run the test and chart the results. This will show just how disparate the results are from these core/crude tests. Most of the test servers compensate when they present the results. Newer, "socket"-based tests are more accurate but there are no free/hidden exposed APIs yet for most of them.
 
-```{r message=FALSE, warning=FALSE, error=FALSE, cache=FALSE}
+```{r message=FALSE, warning=FALSE, error=FALSE, cache=TRUE}
 set.seed(8675309)
 
 bind_rows(
