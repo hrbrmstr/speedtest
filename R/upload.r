@@ -1,6 +1,6 @@
-#' Perform a download speed/bandwidth test
+#' Perform an upload speed/bandwidth test
 #'
-#' Currently, ten tests are performed in increasing order of size.
+#' Currently, six tests are performed in increasing order of size.
 #'
 #' This uses the legacy HTTP method of determining your bandwidth/speed and,
 #' as such, has many issues. Rather than hack-compensate for error-prone
@@ -22,40 +22,28 @@
 #' @note speed/bandwidth values are in Mbits/s; these tests consume bandwidth so
 #'       if you're on a metered connection, you may incur charges.
 #' @export
-#' @examples \dontrun{
-#' config <- spd_config()
-#'
-#' servers <- spd_servers(config=config)
-#' closest_servers <- spd_closest_servers(servers, config=config)
-#' only_the_best_severs <- spd_best_servers(closest_servers, config)
-#'
-#' spd_download_test(closest_servers, config=config)
-#' spd_download_test(best_servers, config=config)
-#' }
-spd_download_test <- function(server, config=NULL, summarise=TRUE, timeout=60) {
+spd_upload_test <- function(server, config=NULL, summarise=TRUE, timeout=60) {
 
   if (nrow(server) > 1) server <- server[1,]
 
   if (is.null(config)) config <- spd_config()
 
-  down_sizes <- c(350, 500, 750, 1000, 1500, 2000, 2500, 3000, 3500, 4000)
+  up_sizes <- c(131072, 262144, 524288, 1048576, 4194304, 8388608)
 
-  dl_urls <- sprintf("%s/random%sx%s.jpg", dirname(server$url[1]), down_sizes, down_sizes)
-
-  pb <- dplyr::progress_estimated(length(dl_urls))
-  purrr::map(dl_urls, ~{
+  pb <- dplyr::progress_estimated(length(up_sizes))
+  purrr::map(up_sizes, ~{
     pb$tick()$print()
-    res <- .download_one(url=.x, timeout=timeout)
-    res$result
+    .dat <- sample(.base_raw, .x, replace=TRUE)
+    res <- .upload_one(server$url[1], .dat, timeout)
+    list(sz=.x, res=res$result)
   }) %>%
-    purrr::discard(is.null) %>%
-    purrr::discard(~.x$status_code != 200) %>%
+    purrr::discard(~is.null(.x$res)) %>%
+    purrr::discard(~.x$res$status_code != 200) %>%
     purrr::map_df(~{
       list(
-        test = "download",
-        secs = .x$times[6] - .x$times[5],
-        size = sum(purrr::map_dbl(names(unlist(.x$all_headers)), nchar)) +
-          sum(purrr::map_dbl(unlist(.x$all_headers), nchar)) + length(.x$content)
+        test = "upload",
+        secs = .x$res$times[6] - .x$res$times[5],
+        size = .x$sz
       )
     }) %>%
     dplyr::mutate(bw = spd_compute_bandwidth(size, secs)) -> out

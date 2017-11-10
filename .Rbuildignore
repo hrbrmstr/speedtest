@@ -8,3 +8,4 @@
 ^\.codecov\.yml$
 ^README_files$
 ^doc$
+^CONDUCT\.md$

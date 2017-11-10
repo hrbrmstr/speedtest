@@ -7,7 +7,7 @@
 spd_servers(config = NULL)
 }
 \arguments{
-\item{config}{client configuration retrieved via [spd_config()]. If `NULL` it
+\item{config}{client configuration retrieved via \code{\link[=spd_config]{spd_config()}}. If \code{NULL} it
 will be retrieved}
 }
 \value{
@@ -15,4 +15,10 @@ data frame
 }
 \description{
 Retrieve a list of SpeedTest servers
+}
+\examples{
+\dontrun{
+config <- spd_config()
+spd_servers(config)
+}
 }

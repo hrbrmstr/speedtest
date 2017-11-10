@@ -2,7 +2,7 @@
 % Please edit documentation in R/closest.r
 \name{spd_closest_servers}
 \alias{spd_closest_servers}
-\title{#' Find "closest" servers (geography-wise) from master server list}
+\title{Find "closest" servers (geography-wise) from master server list}
 \usage{
 spd_closest_servers(servers = NULL, config = NULL)
 }
@@ -17,5 +17,10 @@ will be retrieved}
 server list in order of geographic closeness
 }
 \description{
-Uses \href{https://ipinfo.io}{ipinfo.io} to geolocate your external IP address.
+Find "closest" servers (geography-wise) from master server list
+}
+\examples{
+\dontrun{
+spd_closest_servers()
+}
 }

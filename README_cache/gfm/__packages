@@ -1,0 +1,15 @@
+base
+speedtest
+stringi
+hrbrthemes
+ggplot2
+ggbeeswarm
+tidyverse
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+bindrcpp
