@@ -1,6 +1,6 @@
 Package: speedtest
 Type: Package
-Title: speedtest title goes here otherwise CRAN checks fail
+Title: Tools to Test and Compare Internet Bandwidth Speeds
 Version: 0.1.0
 Date: 2017-11-09
 Authors@R: c(
@@ -9,7 +9,11 @@ Authors@R: c(
   )
 Author: Bob Rudis (bob@rud.is)
 Maintainer: Bob Rudis <bob@rud.is>
-Description: A good description goes here otherwise CRAN checks fail.
+Description: The 'Ookla' 'Speedtest' site <http://beta.speedtest.net/about> provides
+    interactive and programmatic services to test and compare bandwidth speeds from 
+    a source node on the Internet to thousands of test servers. Tools are provided
+    to obtain test server lists, identify target servers for testing and performing
+    speed/bandwidth tests.
 URL: https://github.com/hrbrmstr/speedtest
 BugReports: https://github.com/hrbrmstr/speedtest/issues
 License: AGPL

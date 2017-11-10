@@ -4,11 +4,41 @@ output: rmarkdown::github_document
 
 # speedtest
 
+Tools to Test and Compare Internet Bandwidth Speeds
+
 ## Description
 
+The 'Ookla' 'Speedtest' site <http://beta.speedtest.net/about> provides
+interactive and programmatic services to test and compare bandwidth speeds from 
+a source node on the Internet to thousands of test servers. Tools are provided
+to obtain test server lists, identify target servers for testing and performing
+speed/bandwidth tests.
+    
 ## What's Inside The Tin
 
 The following functions are implemented:
+
+- `spd_best_servers`:	Find "best" servers (latency-wise) from master server list
+- `spd_closest_servers`:	#' Find "closest" servers (geography-wise) from master server list
+- `spd_config`:	Retrieve client configuration information for the speedtest
+- `spd_download_test`:	Download test
+- `spd_servers`:	Retrieve a list of SpeedTest servers
+
+## TODO
+
+Folks interested in contributing can take a look at the TODOs and pick as many as you like! Ones with question marks are truly a "I dunno if we shld" kinda thing. Ones with exclamation marks are essentials.
+
+- [ ] Cache config in memory at startup vs pass around to functions?
+- [ ] Figure out how to use beta sockets hidden API vs the old Flash API?
+- [ ] Ensure the efficacy of relying on the cURL timings for speed measures for the Flash API
+- [ ] Figure out best way to capture the results for post-processing
+- [ ] Upload speed measures!
+- [ ] Upload results to speedtest (tis only fair)!
+- [ ] Incorporate more network or host measures for better statistical determination of the best target!
+- [ ] `autoplot` support!
+- [ ] RStudio Add-in
+- [ ] CLI wrapper
+- [ ] Shiny app?
 
 ## Installation
 
