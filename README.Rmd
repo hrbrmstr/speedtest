@@ -1,8 +1,9 @@
 ---
-output: rmarkdown::github_document
+title: "speedtest"
+output:
+  github_document:
+    html_preview: false
 ---
-
-# speedtest
 
 Tools to Test and Compare Internet Bandwidth Speeds
 
