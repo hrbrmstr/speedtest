@@ -2,7 +2,7 @@
 title: "speedtest"
 output:
   github_document:
-    html_preview: false
+    html_preview: true
 ---
 ```{r include=FALSE}
 knitr::opts_chunk$set(cache=TRUE, message=FALSE, warning=FALSE, error=FALSE, fig.retina=2)

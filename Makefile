@@ -22,7 +22,7 @@ check_all:
 	${RSCRIPT} -e "library(methods); devtools::check(cran=TRUE)"
 
 README.md: README.Rmd
-	Rscript -e 'library(methods); devtools::load_all(); rmarkdown::render("README.Rmd", output="README.md")'
+	Rscript -e 'library(methods); devtools::load_all(); rmarkdown::render("README.Rmd", output_file="README.md")'
 	sed -i.bak 's/[[:space:]]*$$//' $@
 	rm -f $@.bak
 

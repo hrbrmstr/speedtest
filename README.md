@@ -26,6 +26,20 @@ The following functions are implemented:
   - `spd_download_test`: Perform a download speed/bandwidth test
   - `spd_servers`: Retrieve a list of SpeedTest servers
   - `spd_upload_test`: Perform an upload speed/bandwidth test
+  - `spd_test`: Test your internet speed/bandwidth
+
+## Make a CLI utility
+
+While you can run `spd_test()` from an R console, it was desgined to be
+an easily wrapped into a `bash` (et al) alias or put into a small batch
+script. Or, you can just type out the following if you’re
+fleet-of-finger/have dexterous digits:
+
+    Rscript --quiet -e 'speedtest::spd_test()'
+
+which will look something like:
+
+![](imgs/spdtst.gif)
 
 ## TODO
 
@@ -44,13 +58,16 @@ we shld” kinda thing. Ones with exclamation marks are essentials.
     statistical determination of the best target\!
   - \[ \] `autoplot` support\!
   - \[ \] RStudio Add-in
-  - \[ \] CLI wrapper
   - \[ \] Shiny app?
 
 ## Installation
 
 ``` r
 devtools::install_github("hrbrmstr/speedtest")
+```
+
+``` r
+options(width=120)
 ```
 
 ## Usage
@@ -96,11 +113,11 @@ glimpse(spd_download_test(closest_servers[1,], config=config))
     ## $ id      <chr> "5960"
     ## $ host    <chr> "speed0.xcelx.net:8080"
     ## $ url2    <chr> "http://speed1.xcelx.net/speedtest/upload.php"
-    ## $ min     <dbl> 15.08594
-    ## $ mean    <dbl> 72.25247
-    ## $ median  <dbl> 77.6195
-    ## $ max     <dbl> 126.3629
-    ## $ sd      <dbl> 42.88343
+    ## $ min     <dbl> 14.40439
+    ## $ mean    <dbl> 60.06834
+    ## $ median  <dbl> 55.28457
+    ## $ max     <dbl> 127.9436
+    ## $ sd      <dbl> 34.20695
 
 ``` r
 glimpse(spd_download_test(only_the_best_severs[1,], config=config))
@@ -108,24 +125,24 @@ glimpse(spd_download_test(only_the_best_severs[1,], config=config))
 
     ## Observations: 1
     ## Variables: 18
-    ## $ ping_time      <dbl> 0.036793
-    ## $ total_time     <dbl> 0.06847
-    ## $ retrieval_time <dbl> 1.5e-05
-    ## $ url            <chr> "http://speedtest.norwoodlight.com/speedtest/upload.php"
-    ## $ lat            <dbl> 42.1944
-    ## $ lng            <dbl> -71.2
-    ## $ name           <chr> "Norwood, MA"
+    ## $ ping_time      <dbl> 0.02712567
+    ## $ total_time     <dbl> 0.059917
+    ## $ retrieval_time <dbl> 2.3e-05
+    ## $ url            <chr> "http://speed0.xcelx.net/speedtest/upload.php"
+    ## $ lat            <dbl> 42.3875
+    ## $ lng            <dbl> -71.1
+    ## $ name           <chr> "Somerville, MA"
     ## $ country        <chr> "United States"
     ## $ cc             <chr> "US"
-    ## $ sponsor        <chr> "Norwood Light Broadband"
-    ## $ id             <chr> "4920"
-    ## $ host           <chr> "speedtest.norwoodlight.com:8080"
-    ## $ url2           <chr> "http://netgauge.norwoodlight.com/speedtest/upload.php"
-    ## $ min            <dbl> 10.0315
-    ## $ mean           <dbl> 65.53074
-    ## $ median         <dbl> 29.70143
-    ## $ max            <dbl> 169.5498
-    ## $ sd             <dbl> 62.35961
+    ## $ sponsor        <chr> "Axcelx Technologies LLC"
+    ## $ id             <chr> "5960"
+    ## $ host           <chr> "speed0.xcelx.net:8080"
+    ## $ url2           <chr> "http://speed1.xcelx.net/speedtest/upload.php"
+    ## $ min            <dbl> 14.64922
+    ## $ mean           <dbl> 56.15303
+    ## $ median         <dbl> 51.89162
+    ## $ max            <dbl> 107.5084
+    ## $ sd             <dbl> 31.8866
 
 ### Individual upload tests
 
@@ -135,24 +152,24 @@ glimpse(spd_upload_test(only_the_best_severs[1,], config=config))
 
     ## Observations: 1
     ## Variables: 18
-    ## $ ping_time      <dbl> 0.036793
-    ## $ total_time     <dbl> 0.06847
-    ## $ retrieval_time <dbl> 1.5e-05
-    ## $ url            <chr> "http://speedtest.norwoodlight.com/speedtest/upload.php"
-    ## $ lat            <dbl> 42.1944
-    ## $ lng            <dbl> -71.2
-    ## $ name           <chr> "Norwood, MA"
+    ## $ ping_time      <dbl> 0.02712567
+    ## $ total_time     <dbl> 0.059917
+    ## $ retrieval_time <dbl> 2.3e-05
+    ## $ url            <chr> "http://speed0.xcelx.net/speedtest/upload.php"
+    ## $ lat            <dbl> 42.3875
+    ## $ lng            <dbl> -71.1
+    ## $ name           <chr> "Somerville, MA"
     ## $ country        <chr> "United States"
     ## $ cc             <chr> "US"
-    ## $ sponsor        <chr> "Norwood Light Broadband"
-    ## $ id             <chr> "4920"
-    ## $ host           <chr> "speedtest.norwoodlight.com:8080"
-    ## $ url2           <chr> "http://netgauge.norwoodlight.com/speedtest/upload.php"
-    ## $ min            <dbl> 6.855551
-    ## $ mean           <dbl> 8.643362
-    ## $ median         <dbl> 8.680511
-    ## $ max            <dbl> 10.2592
-    ## $ sd             <dbl> 1.52269
+    ## $ sponsor        <chr> "Axcelx Technologies LLC"
+    ## $ id             <chr> "5960"
+    ## $ host           <chr> "speed0.xcelx.net:8080"
+    ## $ url2           <chr> "http://speed1.xcelx.net/speedtest/upload.php"
+    ## $ min            <dbl> 6.240858
+    ## $ mean           <dbl> 9.527599
+    ## $ median         <dbl> 9.303148
+    ## $ max            <dbl> 12.56686
+    ## $ sd             <dbl> 2.451778
 
 ``` r
 glimpse(spd_upload_test(closest_servers[1,], config=config))
@@ -170,11 +187,11 @@ glimpse(spd_upload_test(closest_servers[1,], config=config))
     ## $ id      <chr> "5960"
     ## $ host    <chr> "speed0.xcelx.net:8080"
     ## $ url2    <chr> "http://speed1.xcelx.net/speedtest/upload.php"
-    ## $ min     <dbl> 3.505325
-    ## $ mean    <dbl> 6.558145
-    ## $ median  <dbl> 7.087147
-    ## $ max     <dbl> 9.341766
-    ## $ sd      <dbl> 2.102159
+    ## $ min     <dbl> 6.764702
+    ## $ mean    <dbl> 9.896179
+    ## $ median  <dbl> 10.3605
+    ## $ max     <dbl> 12.85389
+    ## $ sd      <dbl> 2.359868
 
 ### Moar download tests
 
@@ -208,17 +225,18 @@ select(to_compare, sponsor, name, country, host, type)
 ```
 
     ## # A tibble: 9 x 5
-    ##                   sponsor            name       country                                host    type
-    ##                     <chr>           <chr>         <chr>                               <chr>   <chr>
-    ## 1 Axcelx Technologies LLC  Somerville, MA United States               speed0.xcelx.net:8080 closest
-    ## 2                 Comcast      Boston, MA United States stosat-ndhm-01.sys.comcast.net:8080 closest
-    ## 3            Starry, Inc.      Boston, MA United States    speedtest-server.starry.com:8080 closest
-    ## 4 Norwood Light Broadband     Norwood, MA United States     speedtest.norwoodlight.com:8080    best
-    ## 5                 vzalpha     Waltham, MA United States         pdi-ookla2.vzalpha.com:8080    best
-    ## 6          BELD Broadband   Braintree, MA United States                 wotan.beld.net:8080    best
-    ## 7                  SowNet         Gliwice        Poland            speedtest.sownet.pl:8080  random
-    ## 8                 SingTel Los Angeles, CA United States    speedtest-la.singnet.com.sg:8080  random
-    ## 9                 StarNet         Bandung     Indonesia       speedtest.starnet.net.id:8080  random
+    ##                   sponsor            name       country
+    ##                     <chr>           <chr>         <chr>
+    ## 1 Axcelx Technologies LLC  Somerville, MA United States
+    ## 2                 Comcast      Boston, MA United States
+    ## 3            Starry, Inc.      Boston, MA United States
+    ## 4 Axcelx Technologies LLC  Somerville, MA United States
+    ## 5 Norwood Light Broadband     Norwood, MA United States
+    ## 6       CCI - New England  Providence, RI United States
+    ## 7                 PirxNet         Gliwice        Poland
+    ## 8           Interoute VDC Los Angeles, CA United States
+    ## 9                   UNPAD         Bandung     Indonesia
+    ## # ... with 2 more variables: host <chr>, type <chr>
 
 ``` r
 map_df(1:nrow(to_compare), ~{
@@ -240,7 +258,7 @@ mutate(dl_results_full, type=stri_trans_totitle(type)) %>%
   theme(legend.position="none")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+<img src="README_files/figure-gfm/unnamed-chunk-10-1.png" width="672" />
 
 ### Moar upload tests
 
@@ -258,14 +276,15 @@ select(to_compare, sponsor, name, country, host, type)
 ```
 
     ## # A tibble: 6 x 5
-    ##                   sponsor           name       country                                host    type
-    ##                     <chr>          <chr>         <chr>                               <chr>   <chr>
-    ## 1 Axcelx Technologies LLC Somerville, MA United States               speed0.xcelx.net:8080 closest
-    ## 2                 Comcast     Boston, MA United States stosat-ndhm-01.sys.comcast.net:8080 closest
-    ## 3            Starry, Inc.     Boston, MA United States    speedtest-server.starry.com:8080 closest
-    ## 4 Norwood Light Broadband    Norwood, MA United States     speedtest.norwoodlight.com:8080    best
-    ## 5                 vzalpha    Waltham, MA United States         pdi-ookla2.vzalpha.com:8080    best
-    ## 6          BELD Broadband  Braintree, MA United States                 wotan.beld.net:8080    best
+    ##                   sponsor           name       country
+    ##                     <chr>          <chr>         <chr>
+    ## 1 Axcelx Technologies LLC Somerville, MA United States
+    ## 2                 Comcast     Boston, MA United States
+    ## 3            Starry, Inc.     Boston, MA United States
+    ## 4 Axcelx Technologies LLC Somerville, MA United States
+    ## 5 Norwood Light Broadband    Norwood, MA United States
+    ## 6       CCI - New England Providence, RI United States
+    ## # ... with 2 more variables: host <chr>, type <chr>
 
 ``` r
 map_df(1:nrow(to_compare), ~{
@@ -286,7 +305,7 @@ ggplot(ul_results_full, aes(x="Upload Test", y=bw)) +
   theme(legend.position="none")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+<img src="README_files/figure-gfm/unnamed-chunk-12-1.png" width="672" />
 
 ## Code of Conduct
 
