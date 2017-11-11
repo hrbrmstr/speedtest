@@ -26,6 +26,20 @@ The following functions are implemented:
   - `spd_download_test`: Perform a download speed/bandwidth test
   - `spd_servers`: Retrieve a list of SpeedTest servers
   - `spd_upload_test`: Perform an upload speed/bandwidth test
+  - `spd_test`: Test your internet speed/bandwidth
+
+## Make a CLI utility
+
+While you can run `spd_test()` from an R console, it was desgined to be
+an easily wrapped into a `bash` (et al) alias or put into a small batch
+script. Or, you can just type out the following if you’re
+fleet-of-finger/have dexterous digits:
+
+    Rscript --quiet -e 'speedtest::spd_test()'
+
+which will look something like:
+
+![](imgs/spdtst.gif)
 
 ## TODO
 
@@ -44,13 +58,16 @@ we shld” kinda thing. Ones with exclamation marks are essentials.
     statistical determination of the best target\!
   - \[ \] `autoplot` support\!
   - \[ \] RStudio Add-in
-  - \[ \] CLI wrapper
   - \[ \] Shiny app?
 
 ## Installation
 
 ``` r
 devtools::install_github("hrbrmstr/speedtest")
+```
+
+``` r
+options(width=120)
 ```
 
 ## Usage
@@ -96,11 +113,11 @@ glimpse(spd_download_test(closest_servers[1,], config=config))
     ## $ id      <chr> "5960"
     ## $ host    <chr> "speed0.xcelx.net:8080"
     ## $ url2    <chr> "http://speed1.xcelx.net/speedtest/upload.php"
-    ## $ min     <dbl> 15.08594
-    ## $ mean    <dbl> 72.25247
-    ## $ median  <dbl> 77.6195
-    ## $ max     <dbl> 126.3629
-    ## $ sd      <dbl> 42.88343
+    ## $ min     <dbl> 13.24172
+    ## $ mean    <dbl> 54.31822
+    ## $ median  <dbl> 52.28935
+    ## $ max     <dbl> 83.77728
+    ## $ sd      <dbl> 26.88115
 
 ``` r
 glimpse(spd_download_test(only_the_best_severs[1,], config=config))
@@ -108,24 +125,24 @@ glimpse(spd_download_test(only_the_best_severs[1,], config=config))
 
     ## Observations: 1
     ## Variables: 18
-    ## $ ping_time      <dbl> 0.036793
-    ## $ total_time     <dbl> 0.06847
-    ## $ retrieval_time <dbl> 1.5e-05
-    ## $ url            <chr> "http://speedtest.norwoodlight.com/speedtest/upload.php"
-    ## $ lat            <dbl> 42.1944
-    ## $ lng            <dbl> -71.2
-    ## $ name           <chr> "Norwood, MA"
+    ## $ ping_time      <dbl> NaN
+    ## $ total_time     <dbl> 0.100793
+    ## $ retrieval_time <dbl> 2.3e-05
+    ## $ url            <chr> "http://stosat-ndhm-01.sys.comcast.net/speedtest/upload.php"
+    ## $ lat            <dbl> 42.3578
+    ## $ lng            <dbl> -71.0617
+    ## $ name           <chr> "Boston, MA"
     ## $ country        <chr> "United States"
     ## $ cc             <chr> "US"
-    ## $ sponsor        <chr> "Norwood Light Broadband"
-    ## $ id             <chr> "4920"
-    ## $ host           <chr> "speedtest.norwoodlight.com:8080"
-    ## $ url2           <chr> "http://netgauge.norwoodlight.com/speedtest/upload.php"
-    ## $ min            <dbl> 10.0315
-    ## $ mean           <dbl> 65.53074
-    ## $ median         <dbl> 29.70143
-    ## $ max            <dbl> 169.5498
-    ## $ sd             <dbl> 62.35961
+    ## $ sponsor        <chr> "Comcast"
+    ## $ id             <chr> "1774"
+    ## $ host           <chr> "stosat-ndhm-01.sys.comcast.net:8080"
+    ## $ url2           <chr> "http://a-stosat-ndhm-01.sys.comcast.net/speedtest/upload.php"
+    ## $ min            <dbl> 13.7987
+    ## $ mean           <dbl> 73.27741
+    ## $ median         <dbl> 78.4501
+    ## $ max            <dbl> 138.8271
+    ## $ sd             <dbl> 44.21786
 
 ### Individual upload tests
 
@@ -135,24 +152,24 @@ glimpse(spd_upload_test(only_the_best_severs[1,], config=config))
 
     ## Observations: 1
     ## Variables: 18
-    ## $ ping_time      <dbl> 0.036793
-    ## $ total_time     <dbl> 0.06847
-    ## $ retrieval_time <dbl> 1.5e-05
-    ## $ url            <chr> "http://speedtest.norwoodlight.com/speedtest/upload.php"
-    ## $ lat            <dbl> 42.1944
-    ## $ lng            <dbl> -71.2
-    ## $ name           <chr> "Norwood, MA"
+    ## $ ping_time      <dbl> NaN
+    ## $ total_time     <dbl> 0.100793
+    ## $ retrieval_time <dbl> 2.3e-05
+    ## $ url            <chr> "http://stosat-ndhm-01.sys.comcast.net/speedtest/upload.php"
+    ## $ lat            <dbl> 42.3578
+    ## $ lng            <dbl> -71.0617
+    ## $ name           <chr> "Boston, MA"
     ## $ country        <chr> "United States"
     ## $ cc             <chr> "US"
-    ## $ sponsor        <chr> "Norwood Light Broadband"
-    ## $ id             <chr> "4920"
-    ## $ host           <chr> "speedtest.norwoodlight.com:8080"
-    ## $ url2           <chr> "http://netgauge.norwoodlight.com/speedtest/upload.php"
-    ## $ min            <dbl> 6.855551
-    ## $ mean           <dbl> 8.643362
-    ## $ median         <dbl> 8.680511
-    ## $ max            <dbl> 10.2592
-    ## $ sd             <dbl> 1.52269
+    ## $ sponsor        <chr> "Comcast"
+    ## $ id             <chr> "1774"
+    ## $ host           <chr> "stosat-ndhm-01.sys.comcast.net:8080"
+    ## $ url2           <chr> "http://a-stosat-ndhm-01.sys.comcast.net/speedtest/upload.php"
+    ## $ min            <dbl> 3.868808
+    ## $ mean           <dbl> 6.25797
+    ## $ median         <dbl> 6.165482
+    ## $ max            <dbl> 8.921862
+    ## $ sd             <dbl> 1.796898
 
 ``` r
 glimpse(spd_upload_test(closest_servers[1,], config=config))
@@ -170,11 +187,11 @@ glimpse(spd_upload_test(closest_servers[1,], config=config))
     ## $ id      <chr> "5960"
     ## $ host    <chr> "speed0.xcelx.net:8080"
     ## $ url2    <chr> "http://speed1.xcelx.net/speedtest/upload.php"
-    ## $ min     <dbl> 3.505325
-    ## $ mean    <dbl> 6.558145
-    ## $ median  <dbl> 7.087147
-    ## $ max     <dbl> 9.341766
-    ## $ sd      <dbl> 2.102159
+    ## $ min     <dbl> 3.554852
+    ## $ mean    <dbl> 9.124757
+    ## $ median  <dbl> 10.5464
+    ## $ max     <dbl> 11.94891
+    ## $ sd      <dbl> 3.464799
 
 ### Moar download tests
 
@@ -208,17 +225,17 @@ select(to_compare, sponsor, name, country, host, type)
 ```
 
     ## # A tibble: 9 x 5
-    ##                   sponsor            name       country                                host    type
-    ##                     <chr>           <chr>         <chr>                               <chr>   <chr>
-    ## 1 Axcelx Technologies LLC  Somerville, MA United States               speed0.xcelx.net:8080 closest
-    ## 2                 Comcast      Boston, MA United States stosat-ndhm-01.sys.comcast.net:8080 closest
-    ## 3            Starry, Inc.      Boston, MA United States    speedtest-server.starry.com:8080 closest
-    ## 4 Norwood Light Broadband     Norwood, MA United States     speedtest.norwoodlight.com:8080    best
-    ## 5                 vzalpha     Waltham, MA United States         pdi-ookla2.vzalpha.com:8080    best
-    ## 6          BELD Broadband   Braintree, MA United States                 wotan.beld.net:8080    best
-    ## 7                  SowNet         Gliwice        Poland            speedtest.sownet.pl:8080  random
-    ## 8                 SingTel Los Angeles, CA United States    speedtest-la.singnet.com.sg:8080  random
-    ## 9                 StarNet         Bandung     Indonesia       speedtest.starnet.net.id:8080  random
+    ##                     sponsor            name       country                                host    type
+    ##                       <chr>           <chr>         <chr>                               <chr>   <chr>
+    ## 1   Axcelx Technologies LLC  Somerville, MA United States               speed0.xcelx.net:8080 closest
+    ## 2                   Comcast      Boston, MA United States stosat-ndhm-01.sys.comcast.net:8080 closest
+    ## 3              Starry, Inc.      Boston, MA United States    speedtest-server.starry.com:8080 closest
+    ## 4                   Comcast      Boston, MA United States stosat-ndhm-01.sys.comcast.net:8080    best
+    ## 5   Axcelx Technologies LLC  Somerville, MA United States               speed0.xcelx.net:8080    best
+    ## 6   Norwood Light Broadband     Norwood, MA United States     speedtest.norwoodlight.com:8080    best
+    ## 7 Rudzkie Sieci Komputerowe     Ruda Śląska        Poland                  sp1.rsknet.pl:8080  random
+    ## 8                      AT&T Los Angeles, CA United States    lax.speedtest.sbcglobal.net:8080  random
+    ## 9                UP Telecom          Lucena        Brazil        sp1.bandalargaup.com.br:8080  random
 
 ``` r
 map_df(1:nrow(to_compare), ~{
@@ -240,7 +257,7 @@ mutate(dl_results_full, type=stri_trans_totitle(type)) %>%
   theme(legend.position="none")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+<img src="README.gfm-ascii_identifiers_files/figure-gfm/unnamed-chunk-10-1.png" width="672" />
 
 ### Moar upload tests
 
@@ -263,9 +280,9 @@ select(to_compare, sponsor, name, country, host, type)
     ## 1 Axcelx Technologies LLC Somerville, MA United States               speed0.xcelx.net:8080 closest
     ## 2                 Comcast     Boston, MA United States stosat-ndhm-01.sys.comcast.net:8080 closest
     ## 3            Starry, Inc.     Boston, MA United States    speedtest-server.starry.com:8080 closest
-    ## 4 Norwood Light Broadband    Norwood, MA United States     speedtest.norwoodlight.com:8080    best
-    ## 5                 vzalpha    Waltham, MA United States         pdi-ookla2.vzalpha.com:8080    best
-    ## 6          BELD Broadband  Braintree, MA United States                 wotan.beld.net:8080    best
+    ## 4                 Comcast     Boston, MA United States stosat-ndhm-01.sys.comcast.net:8080    best
+    ## 5 Axcelx Technologies LLC Somerville, MA United States               speed0.xcelx.net:8080    best
+    ## 6 Norwood Light Broadband    Norwood, MA United States     speedtest.norwoodlight.com:8080    best
 
 ``` r
 map_df(1:nrow(to_compare), ~{
@@ -286,7 +303,7 @@ ggplot(ul_results_full, aes(x="Upload Test", y=bw)) +
   theme(legend.position="none")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+<img src="README.gfm-ascii_identifiers_files/figure-gfm/unnamed-chunk-12-1.png" width="672" />
 
 ## Code of Conduct
 

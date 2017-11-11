@@ -19,10 +19,13 @@
 #'        statistics will be returned.
 #' @param timeout max time (seconds) to wait for a connection or download to finish.
 #'        Default is `60` seconds
+#' @param .progress if "`dplyr`" then `dplyr` progress bars will be used. If
+#'        "`dot`" then "`.`" will be used. If anything else or "`none`", then
+#'        no progress will be reported.
 #' @note speed/bandwidth values are in Mbits/s; these tests consume bandwidth so
 #'       if you're on a metered connection, you may incur charges.
 #' @export
-spd_upload_test <- function(server, config=NULL, summarise=TRUE, timeout=60) {
+spd_upload_test <- function(server, config=NULL, summarise=TRUE, timeout=60, .progress="dplyr") {
 
   if (nrow(server) > 1) server <- server[1,]
 
@@ -32,7 +35,8 @@ spd_upload_test <- function(server, config=NULL, summarise=TRUE, timeout=60) {
 
   pb <- dplyr::progress_estimated(length(up_sizes))
   purrr::map(up_sizes, ~{
-    pb$tick()$print()
+    if (.progress == 'dplyr') pb$tick()$print()
+    if (.progress == 'dots') cat(".", sep="")
     .dat <- sample(.base_raw, .x, replace=TRUE)
     res <- .upload_one(server$url[1], .dat, timeout)
     list(sz=.x, res=res$result)
@@ -47,6 +51,8 @@ spd_upload_test <- function(server, config=NULL, summarise=TRUE, timeout=60) {
       )
     }) %>%
     dplyr::mutate(bw = spd_compute_bandwidth(size, secs)) -> out
+
+  if (.progress == 'dots') cat("\n", sep="")
 
   if (summarise) {
     out <- dplyr::summarise(out, min=min(bw, na.rm=TRUE), mean=mean(bw, na.rm=TRUE),

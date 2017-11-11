@@ -4,7 +4,8 @@
 \alias{spd_download_test}
 \title{Perform a download speed/bandwidth test}
 \usage{
-spd_download_test(server, config = NULL, summarise = TRUE, timeout = 60)
+spd_download_test(server, config = NULL, summarise = TRUE, timeout = 60,
+  .progress = "dplyr")
 }
 \arguments{
 \item{server}{a data frame row from one of the functions that retrieves or
@@ -20,6 +21,10 @@ statistics will be returned.}
 
 \item{timeout}{max time (seconds) to wait for a connection or download to finish.
 Default is \code{60} seconds}
+
+\item{.progress}{if "\code{dplyr}" then \code{dplyr} progress bars will be used. If
+"\code{dot}" then "\code{.}" will be used. If anything else or "\code{none}", then
+no progress will be reported.}
 }
 \description{
 Currently, ten tests are performed in increasing order of size.

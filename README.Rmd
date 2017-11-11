@@ -4,7 +4,9 @@ output:
   github_document:
     html_preview: false
 ---
-
+```{r include=FALSE}
+knitr::opts_chunk$set(cache=TRUE, message=FALSE, warning=FALSE, error=FALSE, fig.retina=2)
+```
 Tools to Test and Compare Internet Bandwidth Speeds
 
 ## Description
@@ -26,6 +28,17 @@ The following functions are implemented:
 - `spd_download_test`:	Perform a download speed/bandwidth test
 - `spd_servers`:	Retrieve a list of SpeedTest servers
 - `spd_upload_test`:	Perform an upload speed/bandwidth test
+- `spd_test`:	Test your internet speed/bandwidth
+
+## Make a CLI utility
+
+While you can run `spd_test()` from an R console, it was desgined to be an easily wrapped into a `bash` (et al) alias or put into a small batch script. Or, you can just type out the following if you're fleet-of-finger/have dexterous digits:
+
+    Rscript --quiet -e 'speedtest::spd_test()'
+    
+which will look something like:
+
+![](imgs/spdtst.gif)
 
 ## TODO
 
@@ -39,7 +52,6 @@ Folks interested in contributing can take a look at the TODOs and pick as many a
 - [ ] Incorporate more network or host measures for better statistical determination of the best target!
 - [ ] `autoplot` support!
 - [ ] RStudio Add-in
-- [ ] CLI wrapper
 - [ ] Shiny app?
 
 ## Installation
@@ -48,13 +60,13 @@ Folks interested in contributing can take a look at the TODOs and pick as many a
 devtools::install_github("hrbrmstr/speedtest")
 ```
 
-```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
+```{r}
 options(width=120)
 ```
 
 ## Usage
 
-```{r message=FALSE, warning=FALSE, error=FALSE}
+```{r cache=FALSE}
 library(speedtest)
 library(stringi)
 library(hrbrthemes)
@@ -67,7 +79,7 @@ packageVersion("speedtest")
 
 ### Download Speed
 
-```{r message=FALSE, warning=FALSE, error=FALSE, cache=FALSE}
+```{r}
 config <- spd_config()
 
 servers <- spd_servers(config=config)
@@ -77,15 +89,15 @@ only_the_best_severs <- spd_best_servers(closest_servers, config)
 
 ### Individual download tests
 
-```{r message=FALSE, warning=FALSE, error=FALSE}
+```{r}
 glimpse(spd_download_test(closest_servers[1,], config=config))
 
 glimpse(spd_download_test(only_the_best_severs[1,], config=config))
 ```
 
-### Individual download tests
+### Individual upload tests
 
-```{r message=FALSE, warning=FALSE, error=FALSE}
+```{r}
 glimpse(spd_upload_test(only_the_best_severs[1,], config=config))
 
 glimpse(spd_upload_test(closest_servers[1,], config=config))
@@ -95,7 +107,7 @@ glimpse(spd_upload_test(closest_servers[1,], config=config))
 
 Choose closest, "best" and randomly (there can be, and are, some dups as a result for best/closest), run the test and chart the results. This will show just how disparate the results are from these core/crude tests. Most of the test servers compensate when they present the results. Newer, "socket"-based tests are more accurate but there are no free/hidden exposed APIs yet for most of them.
 
-```{r message=FALSE, warning=FALSE, error=FALSE, cache=TRUE}
+```{r}
 set.seed(8675309)
 
 bind_rows(
@@ -117,13 +129,13 @@ bind_rows(
 select(to_compare, sponsor, name, country, host, type)
 ```
 
-```{r message=FALSE, warning=FALSE, error=FALSE, cache=TRUE}
+```{r}
 map_df(1:nrow(to_compare), ~{
   spd_download_test(to_compare[.x,], config=config, summarise=FALSE, timeout=30)
 }) -> dl_results_full
 ```
 
-```{r message=FALSE, warning=FALSE, error=FALSE}
+```{r}
 mutate(dl_results_full, type=stri_trans_totitle(type)) %>%
   ggplot(aes(type, bw, fill=type)) +
   geom_quasirandom(aes(size=size, color=type), width=0.15, shape=21, stroke=0.25) +
@@ -141,7 +153,7 @@ mutate(dl_results_full, type=stri_trans_totitle(type)) %>%
 
 Choose closest and "best" and filter duplicates out since we're really trying to measure here vs show the disparity:
 
-```{r message=FALSE, warning=FALSE, error=FALSE, cache=TRUE}
+```{r}
 bind_rows(
   closest_servers[1:3,] %>% mutate(type="closest"),
   only_the_best_severs[1:3,] %>% mutate(type="best")
@@ -155,7 +167,7 @@ map_df(1:nrow(to_compare), ~{
 }) -> ul_results_full
 ```
 
-```{r message=FALSE, warning=FALSE, error=FALSE}
+```{r}
 ggplot(ul_results_full, aes(x="Upload Test", y=bw)) +
   geom_quasirandom(aes(size=size, fill="col"), width=0.1, shape=21, stroke=0.25, color="#2b2b2b") +
   scale_y_continuous(expand=c(0,0.5), breaks=seq(0,16,4),

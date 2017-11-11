@@ -52,7 +52,7 @@ spd_best_servers <- function(servers=NULL, config=NULL, max=10) {
   dplyr::filter(!grepl("test=test", retrieval_time)) -> target_df
 
   dplyr::left_join(target_df, targets, "latency_url") %>%
-    dplyr::arrange(retrieval_time) %>%
+    dplyr::arrange(total_time) %>%
     dplyr::select(-latency_url, -test_result)
 
 }
