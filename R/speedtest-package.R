@@ -10,7 +10,7 @@
 #' @name speedtest
 #' @docType package
 #' @author Bob Rudis (bob@@rud.is)
-#' @import purrr xml2 httr
+#' @import purrr xml2 httr cli crayon
 #' @importFrom utils globalVariables
 #' @importFrom dplyr left_join arrange filter data_frame select summarise mutate
 #' @importFrom jsonlite fromJSON

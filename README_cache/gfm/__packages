@@ -13,3 +13,4 @@ dplyr
 stringr
 forcats
 bindrcpp
+devtools
