@@ -22,8 +22,8 @@ spd_test <- function() {
 
   cat(cyan("Determining best server...\n"))
   servers <- spd_closest_servers(servers, config)
-  best <- servers
-#  best <- spd_best_servers(servers, config, max=3)
+#  best <- servers
+  best <- spd_best_servers(servers, config, max=3)
 
   cat(green("Initiating test from ") %+% white(config$client$isp) %+% green(" (") %+%
         white(config$client$ip) %+% green(") to ") %+% white(best$sponsor[1]) %+%
