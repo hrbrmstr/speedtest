@@ -30,3 +30,21 @@ sPOST <- purrr::safely(httr::POST)
     query=list(ts=as.numeric(Sys.time())) # try to bust transparent proxy caches
   )
 }
+
+#' Convert a test speed, in Mbits/s, to its string representation along with
+#' appropriate units for the magnitude of the test speed
+#'
+#' - Assumes number is in Mbits/s to start off with
+#' - Only chooses between Kbit/s, Mbit/s, and Gbit/s
+#'
+#' @param number numeric The speed to be converted
+#' @return character The character representation of the speed
+nice_speed <- function(number) {
+  if (number < 1) {
+    return(as.character(as.integer(number * 1000)) %+% " Kbit/s")
+  } else if (number >= 1000) {
+    return(as.character(as.integer(number / 1000)) %+% " Gbit/s")
+  } else {
+    return(as.character(as.integer(number)) %+% " Mbit/s")
+  }
+}
