@@ -7,7 +7,8 @@ Authors@R: c(
     person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
            comment = c(ORCID = "0000-0001-5670-2640")),
     person("Bryce", "Mecum", email = "petridish@gmail.com", role = "ctb",
-           comment = c(ORCID = "0000-0002-0381-3766"))
+           comment = c(ORCID = "0000-0002-0381-3766")),
+    person("Garrett", "Mooney", email = "gmooney@mail.bradley.edu", role = "ctb"),
   )
 Author: Bob Rudis (bob@rud.is)
 Maintainer: Bob Rudis <bob@rud.is>
