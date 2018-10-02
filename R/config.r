@@ -11,7 +11,7 @@ spd_config <- function() {
 
   httr::stop_for_status(res)
 
-  config <- httr::content(res, as="text")
+  config <- httr::content(res, as="text", encoding="UTF-8")
   config <- xml2::read_xml(config)
   config <- xml2::as_list(config)
   config <- config$settings

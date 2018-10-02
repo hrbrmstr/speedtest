@@ -17,7 +17,7 @@ spd_servers <- function(config=NULL) {
 
   if (is.null(config)) config <- spd_config()
 
-  httr::content(res, as="text") %>%
+  httr::content(res, as="text", encoding="UTF-8") %>%
     read_xml() %>%
     xml2::xml_find_all(xpath="//settings/servers/server") %>%
     purrr::map_df(~{
