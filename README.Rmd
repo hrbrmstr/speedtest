@@ -180,6 +180,12 @@ ggplot(ul_results_full, aes(x="Upload Test", y=bw)) +
   theme(legend.position="none")
 ```
 
+## speedtest Metrics
+
+```{r echo=FALSE}
+cloc::cloc_pkg_md()
+```
+
 ## Code of Conduct
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

@@ -307,6 +307,15 @@ ggplot(ul_results_full, aes(x="Upload Test", y=bw)) +
 
 <img src="README_files/figure-gfm/unnamed-chunk-12-1.png" width="672" />
 
+## speedtest Metrics
+
+| Lang | \# Files |  (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
+| :--- | -------: | ---: | --: | ---: | ----------: | ---: | -------: | ---: |
+| HTML |        1 | 0.06 | 819 | 0.73 |          10 | 0.07 |        0 | 0.00 |
+| R    |       13 | 0.81 | 215 | 0.19 |          70 | 0.51 |      167 | 0.68 |
+| Rmd  |        1 | 0.06 |  64 | 0.06 |          49 | 0.36 |       78 | 0.32 |
+| make |        1 | 0.06 |  20 | 0.02 |           9 | 0.07 |        0 | 0.00 |
+
 ## Code of Conduct
 
 Please note that this project is released with a [Contributor Code of
