@@ -47,18 +47,18 @@ Folks interested in contributing can take a look at the TODOs and pick
 as many as you like\! Ones with question marks are truly a “I dunno if
 we shld” kinda thing. Ones with exclamation marks are essentials.
 
-  - \[ \] Cache config in memory at startup vs pass around to functions?
-  - \[ \] Figure out how to use beta sockets hidden API vs the old Flash
+  - [ ] Cache config in memory at startup vs pass around to functions?
+  - [ ] Figure out how to use beta sockets hidden API vs the old Flash
     API?
-  - \[ \] Ensure the efficacy of relying on the cURL timings for speed
+  - [ ] Ensure the efficacy of relying on the cURL timings for speed
     measures for the Flash API
-  - \[ \] Figure out best way to capture the results for post-processing
-  - \[ \] Upload results to speedtest (tis only fair)\!
-  - \[ \] Incorporate more network or host measures for better
-    statistical determination of the best target\!
-  - \[ \] `autoplot` support\!
-  - \[ \] RStudio Add-in
-  - \[ \] Shiny app?
+  - [ ] Figure out best way to capture the results for post-processing
+  - [ ] Upload results to speedtest (tis only fair)\!
+  - [ ] Incorporate more network or host measures for better statistical
+    determination of the best target\!
+  - [ ] `autoplot` support\!
+  - [ ] RStudio Add-in
+  - [ ] Shiny app?
 
 ## Installation
 
@@ -248,7 +248,7 @@ map_df(1:nrow(to_compare), ~{
 mutate(dl_results_full, type=stri_trans_totitle(type)) %>%
   ggplot(aes(type, bw, fill=type)) +
   geom_quasirandom(aes(size=size, color=type), width=0.15, shape=21, stroke=0.25) +
-  scale_y_continuous(expand=c(0,5), labels=c(sprintf("%s", seq(0,150,50)), "200 Mb/s"), limits=c(0,200)) +
+  scale_y_continuous(expand=c(0,5)) +
   scale_size(range=c(2,6)) +
   scale_color_manual(values=c(Random="#b2b2b2", Best="#2b2b2b", Closest="#2b2b2b")) +
   scale_fill_ipsum() +
@@ -295,8 +295,7 @@ map_df(1:nrow(to_compare), ~{
 ``` r
 ggplot(ul_results_full, aes(x="Upload Test", y=bw)) +
   geom_quasirandom(aes(size=size, fill="col"), width=0.1, shape=21, stroke=0.25, color="#2b2b2b") +
-  scale_y_continuous(expand=c(0,0.5), breaks=seq(0,16,4),
-                     labels=c(sprintf("%s", seq(0,12,4)), "16 Mb/s"), limits=c(0,16)) +
+  scale_y_continuous(expand=c(0,0.5)) +
   scale_size(range=c(2,6)) +
   scale_fill_ipsum() +
   labs(x=NULL, y=NULL, title="Upload bandwidth test by selected server type",

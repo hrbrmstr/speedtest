@@ -14,3 +14,4 @@ stringr
 forcats
 bindrcpp
 devtools
+usethis
