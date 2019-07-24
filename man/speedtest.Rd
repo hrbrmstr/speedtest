@@ -6,11 +6,19 @@
 \alias{speedtest-package}
 \title{Tools to Test and Compare Internet Bandwidth Speeds}
 \description{
-The 'Ookla' 'Speedtest' site \url{http://beta.speedtest.net/about} provides
+The 'Ookla' 'Speedtest' site \url{https://beta.speedtest.net/about} provides
 interactive and programmatic services to test and compare bandwidth speeds
 from  a source node on the Internet to thousands of test servers. Tools are
 provided to obtain test server lists, identify target servers for testing and
 performing speed/bandwidth tests.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://gitlab.com/hrbrmstr/speedtest}
+  \item Report bugs at \url{https://gitlab.com/hrbrmstr/speedtest/issues}
+}
+
 }
 \author{
 Bob Rudis (bob@rud.is)

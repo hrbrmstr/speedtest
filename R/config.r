@@ -7,7 +7,10 @@
 #' }
 spd_config <- function() {
 
-  res <- httr::GET("http://www.speedtest.net/speedtest-config.php")
+  httr::GET(
+    url = "https://www.speedtest.net/speedtest-config.php",
+    httr::user_agent(.speedtest_ua)
+  ) -> res
 
   httr::stop_for_status(res)
 

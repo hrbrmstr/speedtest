@@ -25,7 +25,8 @@
 #' @note speed/bandwidth values are in Mbits/s; these tests consume bandwidth so
 #'       if you're on a metered connection, you may incur charges.
 #' @export
-spd_upload_test <- function(server, config=NULL, summarise=TRUE, timeout=60, .progress="dplyr") {
+spd_upload_test <- function(server, config = NULL, summarise = TRUE, timeout=60,
+                            .progress = "dplyr") {
 
   if (nrow(server) > 1) server <- server[1,]
 
@@ -55,9 +56,14 @@ spd_upload_test <- function(server, config=NULL, summarise=TRUE, timeout=60, .pr
   if (.progress == 'dots') cat("\n", sep="")
 
   if (summarise) {
-    out <- dplyr::summarise(out, min=min(bw, na.rm=TRUE), mean=mean(bw, na.rm=TRUE),
-                            median=median(bw, na.rm=TRUE), max=max(bw, na.rm=TRUE),
-                            sd=sd(bw, na.rm=TRUE))
+    dplyr::summarise(
+      out,
+      min = min(bw, na.rm = TRUE),
+      mean = mean(bw, na.rm = TRUE),
+      median = median(bw, na.rm = TRUE),
+      max = max(bw, na.rm = TRUE),
+      sd = sd(bw, na.rm = TRUE)
+    ) -> out
   }
 
   out$id <- server$id

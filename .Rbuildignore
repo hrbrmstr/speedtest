@@ -5,8 +5,14 @@
 ^README\.*html$
 ^NOTES\.*Rmd$
 ^NOTES\.*html$
+^README\.gfm*$
+^README_cache$
 ^\.codecov\.yml$
 ^README_files$
 ^doc$
 ^CONDUCT\.md$
 ^imgs$
+^LICENSE\.md$
+^Makefile$
+^appveyor\.yml$
+

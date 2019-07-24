@@ -12,6 +12,3 @@ purrr
 dplyr
 stringr
 forcats
-bindrcpp
-devtools
-usethis

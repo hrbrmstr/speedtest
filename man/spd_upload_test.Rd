@@ -4,8 +4,8 @@
 \alias{spd_upload_test}
 \title{Perform an upload speed/bandwidth test}
 \usage{
-spd_upload_test(server, config = NULL, summarise = TRUE, timeout = 60,
-  .progress = "dplyr")
+spd_upload_test(server, config = NULL, summarise = TRUE,
+  timeout = 60, .progress = "dplyr")
 }
 \arguments{
 \item{server}{a data frame row from one of the functions that retrieves or

@@ -11,15 +11,18 @@
 #' }
 spd_servers <- function(config=NULL) {
 
-  res <- httr::GET("https://www.speedtest.net/speedtest-servers-static.php")
+  httr::GET(
+    url = "https://www.speedtest.net/speedtest-servers-static.php",
+    httr::user_agent(.speedtest_ua)
+  ) -> res
 
   httr::stop_for_status(res)
 
   if (is.null(config)) config <- spd_config()
 
-  httr::content(res, as="text", encoding="UTF-8") %>%
-    read_xml() %>%
-    xml2::xml_find_all(xpath="//settings/servers/server") %>%
+  httr::content(res, as = "text", encoding = "UTF-8") %>%
+    xml2::read_xml() %>%
+    xml2::xml_find_all(xpath = "//settings/servers/server") %>%
     purrr::map_df(~{
       list(
         url = xml2::xml_attr(.x, "url") %||% NA_character_,

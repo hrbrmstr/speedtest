@@ -41,8 +41,9 @@ spd_best_servers <- function(servers=NULL, config=NULL, max=10) {
   curl::multi_run()
 
   purrr::map_df(.lat_dat, ~{
-    data_frame(
+    tibble(
       latency_url = .x$url,
+  # TODO add some code to let this be a thing
   #    ping_time = mean(pingr::ping(urltools::domain(.x$url)), na.rm=TRUE)/1000,
       total_time = .x$times["total"],
       retrieval_time = .x$times[6] - .x$times[5],

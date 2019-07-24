@@ -1,17 +1,13 @@
-sGET <- purrr::safely(httr::GET)
-sPOST <- purrr::safely(httr::POST)
-
-
 .download_one <- function(url, timeout) {
   sGET(
     url = url,
     httr::add_headers(
-      `Referer` = "http://c.speedtest.net/flash/speedtest.swf",
+      `Referer` = "https://c.speedtest.net/flash/speedtest.swf",
       `Cache-Control` = "no-cache" # try to bust transparent proxy caches
     ),
     httr::user_agent(.speedtest_ua),
     httr::timeout(timeout),
-    query=list(ts=as.numeric(Sys.time())) # try to bust transparent proxy caches
+    query = list(ts = as.numeric(Sys.time())) # try to bust transparent proxy caches
   )
 }
 
@@ -19,15 +15,15 @@ sPOST <- purrr::safely(httr::POST)
   sPOST(
     url = url,
     httr::add_headers(
-      `Referer` = "http://c.speedtest.net/flash/speedtest.swf",
+      `Referer` = "https://c.speedtest.net/flash/speedtest.swf",
       `Connection` = "Keep-Alive",
       `Cache-Control` = "no-cache" # try to bust transparent proxy caches
     ),
     encode="form",
-    body=dat,
+    body = dat,
     httr::user_agent(.speedtest_ua),
     httr::timeout(timeout),
-    query=list(ts=as.numeric(Sys.time())) # try to bust transparent proxy caches
+    query = list(ts = as.numeric(Sys.time())) # try to bust transparent proxy caches
   )
 }
 
@@ -38,6 +34,7 @@ sPOST <- purrr::safely(httr::POST)
 #' - Only chooses between Kbit/s, Mbit/s, and Gbit/s
 #'
 #' @param number numeric The speed to be converted
+#' @export
 #' @return character The character representation of the speed
 nice_speed <- function(number) {
   if (number < 1) {

@@ -1,40 +1,31 @@
 Package: speedtest
 Type: Package
 Title: Tools to Test and Compare Internet Bandwidth Speeds
-Version: 0.1.0
-Date: 2017-11-09
-Authors@R: c(
-    person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
-           comment = c(ORCID = "0000-0001-5670-2640")),
-    person("Bryce", "Mecum", email = "petridish@gmail.com", role = "ctb",
-           comment = c(ORCID = "0000-0002-0381-3766")),
-    person("Garrett", "Mooney", email = "gmooney@mail.bradley.edu", role = "ctb")
-  )
-Author: Bob Rudis (bob@rud.is)
+Version: 0.2.0
+Date: 2019-07-24
+Authors@R: c( person("Bob", "Rudis", email = "bob@rud.is",
+      role = c("aut", "cre"), comment = c(ORCID =
+      "0000-0001-5670-2640")), person("Bryce", "Mecum",
+      email = "petridish@gmail.com", role = "ctb", comment
+      = c(ORCID = "0000-0002-0381-3766")),
+      person("Garrett", "Mooney", email =
+      "gmooney@mail.bradley.edu", role = "ctb") )
 Maintainer: Bob Rudis <bob@rud.is>
-Description: The 'Ookla' 'Speedtest' site <http://beta.speedtest.net/about> provides
-    interactive and programmatic services to test and compare bandwidth speeds from 
-    a source node on the Internet to thousands of test servers. Tools are provided
-    to obtain test server lists, identify target servers for testing and performing
-    speed/bandwidth tests.
-URL: https://github.com/hrbrmstr/speedtest
-BugReports: https://github.com/hrbrmstr/speedtest/issues
-License: AGPL
-Suggests:
-    testthat,
-    covr
-Depends:
-    R (>= 3.2.0)
+Description: The 'Ookla' 'Speedtest' site
+      <http://beta.speedtest.net/about> provides
+      interactive and programmatic services to test and
+      compare bandwidth speeds from a source node on the
+      Internet to thousands of test servers. Tools are
+      provided to obtain test server lists, identify target
+      servers for testing and performing speed/bandwidth
+      tests.
+URL: https://gitlab.com/hrbrmstr/speedtest
+BugReports: https://gitlab.com/hrbrmstr/speedtest/issues
+License: MIT + file LICENSE
+Suggests: covr, tinytest
+Depends: R (>= 3.2.0)
 Encoding: UTF-8
-Imports:
-    curl,
-    purrr,
-    dplyr,
-    xml2,
-    utils,
-    pingr,
-    urltools,
-    jsonlite,
-    crayon,
-    cli
-RoxygenNote: 6.0.1
+Imports: httr, stats, curl, purrr, dplyr, xml2, utils,
+      pingr, urltools, jsonlite, crayon, tibble, cli,
+      magrittr
+RoxygenNote: 6.1.1

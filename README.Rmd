@@ -1,34 +1,32 @@
 ---
 title: "speedtest"
-output:
-  github_document:
-    html_preview: true
+output: rmarkdown::github_document
+editor_options: 
+  chunk_output_type: console
 ---
-```{r include=FALSE}
-knitr::opts_chunk$set(cache=TRUE, message=FALSE, warning=FALSE, error=FALSE, fig.retina=2)
+```{r pkg-knitr-opts, include=FALSE}
+hrbrpkghelpr::global_opts()
 ```
+
+```{r badges, results='asis', echo=FALSE, cache=FALSE}
+hrbrpkghelpr::stinking_badges()
+```
+
+# speedtest
+
 Tools to Test and Compare Internet Bandwidth Speeds
 
 ## Description
 
-The 'Ookla' 'Speedtest' site <http://beta.speedtest.net/about> provides
-interactive and programmatic services to test and compare bandwidth speeds from 
-a source node on the Internet to thousands of test servers. Tools are provided
-to obtain test server lists, identify target servers for testing and performing
-speed/bandwidth tests.
+The 'Ookla' 'Speedtest' site <http://beta.speedtest.net/about> provides interactive and programmatic services to test and compare bandwidth speeds from a source node on the Internet to thousands of test servers. Tools are provided to obtain test server lists, identify target servers for testing and performing speed/bandwidth tests.
     
 ## What's Inside The Tin
 
 The following functions are implemented:
 
-- `spd_best_servers`:	Find "best" servers (latency-wise) from master server list
-- `spd_closest_servers`:	Find "closest" servers (geography-wise) from master server list
-- `spd_compute_bandwidth`:	Compute bandwidth from bytes transferred and time taken
-- `spd_config`:	Retrieve client configuration information for the speedtest
-- `spd_download_test`:	Perform a download speed/bandwidth test
-- `spd_servers`:	Retrieve a list of SpeedTest servers
-- `spd_upload_test`:	Perform an upload speed/bandwidth test
-- `spd_test`:	Test your internet speed/bandwidth
+```{r ingredients, results='asis', echo=FALSE, cache=FALSE}
+hrbrpkghelpr::describe_ingredients()
+```
 
 ## Make a CLI utility
 
@@ -38,7 +36,7 @@ While you can run `spd_test()` from an R console, it was desgined to be an easil
     
 which will look something like:
 
-![](imgs/spdtst.gif)
+![](man/figures/spdtst.gif)
 
 ## TODO
 
@@ -56,17 +54,13 @@ Folks interested in contributing can take a look at the TODOs and pick as many a
 
 ## Installation
 
-```{r eval=FALSE}
-devtools::install_github("hrbrmstr/speedtest")
-```
-
-```{r}
-options(width=120)
+```{r install-ex, results='asis', echo=FALSE, cache=FALSE}
+hrbrpkghelpr::install_block()
 ```
 
 ## Usage
 
-```{r cache=FALSE}
+```{r libs, cache=FALSE}
 library(speedtest)
 library(stringi)
 library(hrbrthemes)
@@ -79,7 +73,7 @@ packageVersion("speedtest")
 
 ### Download Speed
 
-```{r}
+```{r dl-speeed, cache=TRUE}
 config <- spd_config()
 
 servers <- spd_servers(config=config)
@@ -89,7 +83,7 @@ only_the_best_severs <- spd_best_servers(closest_servers, config)
 
 ### Individual download tests
 
-```{r}
+```{r individ-dl, cache=TRUE}
 glimpse(spd_download_test(closest_servers[1,], config=config))
 
 glimpse(spd_download_test(only_the_best_severs[1,], config=config))
@@ -97,7 +91,7 @@ glimpse(spd_download_test(only_the_best_severs[1,], config=config))
 
 ### Individual upload tests
 
-```{r}
+```{r individ-up, cache=TRUE}
 glimpse(spd_upload_test(only_the_best_severs[1,], config=config))
 
 glimpse(spd_upload_test(closest_servers[1,], config=config))
@@ -107,7 +101,7 @@ glimpse(spd_upload_test(closest_servers[1,], config=config))
 
 Choose closest, "best" and randomly (there can be, and are, some dups as a result for best/closest), run the test and chart the results. This will show just how disparate the results are from these core/crude tests. Most of the test servers compensate when they present the results. Newer, "socket"-based tests are more accurate but there are no free/hidden exposed APIs yet for most of them.
 
-```{r}
+```{r moar-dl-tests, cache=TRUE}
 set.seed(8675309)
 
 bind_rows(
@@ -127,15 +121,11 @@ bind_rows(
   ungroup() -> to_compare
 
 select(to_compare, sponsor, name, country, host, type)
-```
 
-```{r}
 map_df(1:nrow(to_compare), ~{
   spd_download_test(to_compare[.x,], config=config, summarise=FALSE, timeout=30)
 }) -> dl_results_full
-```
 
-```{r}
 mutate(dl_results_full, type=stri_trans_totitle(type)) %>%
   ggplot(aes(type, bw, fill=type)) +
   geom_quasirandom(aes(size=size, color=type), width=0.15, shape=21, stroke=0.25) +
@@ -153,7 +143,7 @@ mutate(dl_results_full, type=stri_trans_totitle(type)) %>%
 
 Choose closest and "best" and filter duplicates out since we're really trying to measure here vs show the disparity:
 
-```{r}
+```{r moar-ul-tests, cache=TRUE}
 bind_rows(
   closest_servers[1:3,] %>% mutate(type="closest"),
   only_the_best_severs[1:3,] %>% mutate(type="best")
@@ -165,9 +155,7 @@ select(to_compare, sponsor, name, country, host, type)
 map_df(1:nrow(to_compare), ~{
   spd_upload_test(to_compare[.x,], config=config, summarise=FALSE, timeout=30)
 }) -> ul_results_full
-```
 
-```{r}
 ggplot(ul_results_full, aes(x="Upload Test", y=bw)) +
   geom_quasirandom(aes(size=size, fill="col"), width=0.1, shape=21, stroke=0.25, color="#2b2b2b") +
   scale_y_continuous(expand=c(0,0.5)) +
@@ -181,10 +169,10 @@ ggplot(ul_results_full, aes(x="Upload Test", y=bw)) +
 
 ## speedtest Metrics
 
-```{r echo=FALSE}
+```{r cloc, echo=FALSE}
 cloc::cloc_pkg_md()
 ```
 
 ## Code of Conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.

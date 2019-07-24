@@ -1,6 +1,23 @@
 speedtest
 ================
 
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Signed
+by](https://img.shields.io/badge/Keybase-Verified-brightgreen.svg)](https://keybase.io/hrbrmstr)
+![Signed commit
+%](https://img.shields.io/badge/Signed_Commits-21.7%25-lightgrey.svg)
+[![Linux build
+Status](https://travis-ci.org/hrbrmstr/speedtest.svg?branch=master)](https://travis-ci.org/hrbrmstr/speedtest)
+[![Coverage
+Status](https://codecov.io/gh/hrbrmstr/speedtest/branch/master/graph/badge.svg)](https://codecov.io/gh/hrbrmstr/speedtest)
+![Minimal R
+Version](https://img.shields.io/badge/R%3E%3D-3.2.0-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+
+# speedtest
+
 Tools to Test and Compare Internet Bandwidth Speeds
 
 ## Description
@@ -15,6 +32,9 @@ for testing and performing speed/bandwidth tests.
 
 The following functions are implemented:
 
+  - `nice_speed`: Convert a test speed, in Mbits/s, to its string
+    representation along with appropriate units for the magnitude of the
+    test speed
   - `spd_best_servers`: Find “best” servers (latency-wise) from master
     server list
   - `spd_closest_servers`: Find “closest” servers (geography-wise) from
@@ -25,8 +45,8 @@ The following functions are implemented:
     speedtest
   - `spd_download_test`: Perform a download speed/bandwidth test
   - `spd_servers`: Retrieve a list of SpeedTest servers
-  - `spd_upload_test`: Perform an upload speed/bandwidth test
   - `spd_test`: Test your internet speed/bandwidth
+  - `spd_upload_test`: Perform an upload speed/bandwidth test
 
 ## Make a CLI utility
 
@@ -39,7 +59,7 @@ fleet-of-finger/have dexterous digits:
 
 which will look something like:
 
-![](imgs/spdtst.gif)
+![](man/figures/spdtst.gif)
 
 ## TODO
 
@@ -63,12 +83,21 @@ we shld” kinda thing. Ones with exclamation marks are essentials.
 ## Installation
 
 ``` r
-devtools::install_github("hrbrmstr/speedtest")
+install.packages("speedtest", repos = "https://cinc.rud.is")
+# or
+remotes::install_git("https://git.rud.is/hrbrmstr/speedtest.git")
+# or
+remotes::install_git("https://git.sr.ht/~hrbrmstr/speedtest")
+# or
+remotes::install_gitlab("hrbrmstr/speedtest")
+# or
+remotes::install_bitbucket("hrbrmstr/speedtest")
+# or
+remotes::install_github("hrbrmstr/speedtest")
 ```
 
-``` r
-options(width=120)
-```
+NOTE: To use the ‘remotes’ install options you will need to have the
+[{remotes} package](https://github.com/r-lib/remotes) installed.
 
 ## Usage
 
@@ -81,9 +110,8 @@ library(tidyverse)
 
 # current verison
 packageVersion("speedtest")
+## [1] '0.2.0'
 ```
-
-    ## [1] '0.1.0'
 
 ### Download Speed
 
@@ -99,99 +127,89 @@ only_the_best_severs <- spd_best_servers(closest_servers, config)
 
 ``` r
 glimpse(spd_download_test(closest_servers[1,], config=config))
-```
+## Observations: 1
+## Variables: 15
+## $ url     <chr> "http://oak-speedtest.otelco.com:8080/speedtest/upload.php"
+## $ lat     <dbl> 43.6614
+## $ lng     <dbl> -70.2558
+## $ name    <chr> "Portland, ME"
+## $ country <chr> "United States"
+## $ cc      <chr> "US"
+## $ sponsor <chr> "Otelco"
+## $ id      <chr> "1037"
+## $ host    <chr> "oak-speedtest.otelco.com:8080"
+## $ url2    <chr> "http://66.181.127.42/speedtest/upload.php"
+## $ min     <dbl> 12.16723
+## $ mean    <dbl> 14.91807
+## $ median  <dbl> 14.57376
+## $ max     <dbl> 17.30854
+## $ sd      <dbl> 1.736132
 
-    ## Observations: 1
-    ## Variables: 15
-    ## $ url     <chr> "http://speed0.xcelx.net/speedtest/upload.php"
-    ## $ lat     <dbl> 42.3875
-    ## $ lng     <dbl> -71.1
-    ## $ name    <chr> "Somerville, MA"
-    ## $ country <chr> "United States"
-    ## $ cc      <chr> "US"
-    ## $ sponsor <chr> "Axcelx Technologies LLC"
-    ## $ id      <chr> "5960"
-    ## $ host    <chr> "speed0.xcelx.net:8080"
-    ## $ url2    <chr> "http://speed1.xcelx.net/speedtest/upload.php"
-    ## $ min     <dbl> 14.40439
-    ## $ mean    <dbl> 60.06834
-    ## $ median  <dbl> 55.28457
-    ## $ max     <dbl> 127.9436
-    ## $ sd      <dbl> 34.20695
-
-``` r
 glimpse(spd_download_test(only_the_best_severs[1,], config=config))
+## Observations: 1
+## Variables: 17
+## $ total_time     <dbl> 0.075129
+## $ retrieval_time <dbl> 2.8e-05
+## $ url            <chr> "http://stosat-ndhm-01.sys.comcast.net:8080/speedtest/upload.php"
+## $ lat            <dbl> 42.3578
+## $ lng            <dbl> -71.0617
+## $ name           <chr> "Boston, MA"
+## $ country        <chr> "United States"
+## $ cc             <chr> "US"
+## $ sponsor        <chr> "Comcast"
+## $ id             <chr> "1774"
+## $ host           <chr> "stosat-ndhm-01.sys.comcast.net:8080"
+## $ url2           <chr> "http://a-stosat-ndhm-01.sys.comcast.net/speedtest/upload.php"
+## $ min            <dbl> 14.49186
+## $ mean           <dbl> 17.68452
+## $ median         <dbl> 16.75617
+## $ max            <dbl> 24.3737
+## $ sd             <dbl> 2.987197
 ```
-
-    ## Observations: 1
-    ## Variables: 18
-    ## $ ping_time      <dbl> 0.02712567
-    ## $ total_time     <dbl> 0.059917
-    ## $ retrieval_time <dbl> 2.3e-05
-    ## $ url            <chr> "http://speed0.xcelx.net/speedtest/upload.php"
-    ## $ lat            <dbl> 42.3875
-    ## $ lng            <dbl> -71.1
-    ## $ name           <chr> "Somerville, MA"
-    ## $ country        <chr> "United States"
-    ## $ cc             <chr> "US"
-    ## $ sponsor        <chr> "Axcelx Technologies LLC"
-    ## $ id             <chr> "5960"
-    ## $ host           <chr> "speed0.xcelx.net:8080"
-    ## $ url2           <chr> "http://speed1.xcelx.net/speedtest/upload.php"
-    ## $ min            <dbl> 14.64922
-    ## $ mean           <dbl> 56.15303
-    ## $ median         <dbl> 51.89162
-    ## $ max            <dbl> 107.5084
-    ## $ sd             <dbl> 31.8866
 
 ### Individual upload tests
 
 ``` r
 glimpse(spd_upload_test(only_the_best_severs[1,], config=config))
-```
+## Observations: 1
+## Variables: 17
+## $ total_time     <dbl> 0.075129
+## $ retrieval_time <dbl> 2.8e-05
+## $ url            <chr> "http://stosat-ndhm-01.sys.comcast.net:8080/speedtest/upload.php"
+## $ lat            <dbl> 42.3578
+## $ lng            <dbl> -71.0617
+## $ name           <chr> "Boston, MA"
+## $ country        <chr> "United States"
+## $ cc             <chr> "US"
+## $ sponsor        <chr> "Comcast"
+## $ id             <chr> "1774"
+## $ host           <chr> "stosat-ndhm-01.sys.comcast.net:8080"
+## $ url2           <chr> "http://a-stosat-ndhm-01.sys.comcast.net/speedtest/upload.php"
+## $ min            <dbl> 9.951216
+## $ mean           <dbl> 20.33949
+## $ median         <dbl> 22.11265
+## $ max            <dbl> 23.4545
+## $ sd             <dbl> 5.148238
 
-    ## Observations: 1
-    ## Variables: 18
-    ## $ ping_time      <dbl> 0.02712567
-    ## $ total_time     <dbl> 0.059917
-    ## $ retrieval_time <dbl> 2.3e-05
-    ## $ url            <chr> "http://speed0.xcelx.net/speedtest/upload.php"
-    ## $ lat            <dbl> 42.3875
-    ## $ lng            <dbl> -71.1
-    ## $ name           <chr> "Somerville, MA"
-    ## $ country        <chr> "United States"
-    ## $ cc             <chr> "US"
-    ## $ sponsor        <chr> "Axcelx Technologies LLC"
-    ## $ id             <chr> "5960"
-    ## $ host           <chr> "speed0.xcelx.net:8080"
-    ## $ url2           <chr> "http://speed1.xcelx.net/speedtest/upload.php"
-    ## $ min            <dbl> 6.240858
-    ## $ mean           <dbl> 9.527599
-    ## $ median         <dbl> 9.303148
-    ## $ max            <dbl> 12.56686
-    ## $ sd             <dbl> 2.451778
-
-``` r
 glimpse(spd_upload_test(closest_servers[1,], config=config))
+## Observations: 1
+## Variables: 15
+## $ url     <chr> "http://oak-speedtest.otelco.com:8080/speedtest/upload.php"
+## $ lat     <dbl> 43.6614
+## $ lng     <dbl> -70.2558
+## $ name    <chr> "Portland, ME"
+## $ country <chr> "United States"
+## $ cc      <chr> "US"
+## $ sponsor <chr> "Otelco"
+## $ id      <chr> "1037"
+## $ host    <chr> "oak-speedtest.otelco.com:8080"
+## $ url2    <chr> "http://66.181.127.42/speedtest/upload.php"
+## $ min     <dbl> 5.646166
+## $ mean    <dbl> 16.96393
+## $ median  <dbl> 19.76833
+## $ max     <dbl> 22.18757
+## $ sd      <dbl> 6.542608
 ```
-
-    ## Observations: 1
-    ## Variables: 15
-    ## $ url     <chr> "http://speed0.xcelx.net/speedtest/upload.php"
-    ## $ lat     <dbl> 42.3875
-    ## $ lng     <dbl> -71.1
-    ## $ name    <chr> "Somerville, MA"
-    ## $ country <chr> "United States"
-    ## $ cc      <chr> "US"
-    ## $ sponsor <chr> "Axcelx Technologies LLC"
-    ## $ id      <chr> "5960"
-    ## $ host    <chr> "speed0.xcelx.net:8080"
-    ## $ url2    <chr> "http://speed1.xcelx.net/speedtest/upload.php"
-    ## $ min     <dbl> 6.764702
-    ## $ mean    <dbl> 9.896179
-    ## $ median  <dbl> 10.3605
-    ## $ max     <dbl> 12.85389
-    ## $ sd      <dbl> 2.359868
 
 ### Moar download tests
 
@@ -222,29 +240,23 @@ bind_rows(
   ungroup() -> to_compare
 
 select(to_compare, sponsor, name, country, host, type)
-```
+## # A tibble: 9 x 5
+##   sponsor             name           country            host                                 type   
+##   <chr>               <chr>          <chr>              <chr>                                <chr>  
+## 1 Otelco              Portland, ME   United States      oak-speedtest.otelco.com:8080        closest
+## 2 netBlazr            Somerville, MA United States      speed0.xcelx.net:8080                closest
+## 3 Comcast             Boston, MA     United States      stosat-ndhm-01.sys.comcast.net:8080  closest
+## 4 Comcast             Boston, MA     United States      stosat-ndhm-01.sys.comcast.net:8080  best   
+## 5 netBlazr            Somerville, MA United States      speed0.xcelx.net:8080                best   
+## 6 BELD Broadband      Braintree, MA  United States      wotan.beld.net:8080                  best   
+## 7 LLC Trans Analitika Novaya Usman   Russian Federation speedtest-1.cnetvrn.ru:8080          random 
+## 8 VEGA Kharkiv        Kharkiv        Ukraine            speedtest.vega.com.ua:8080           random 
+## 9 Oxylion S.A         Katowice       Poland             speedtest-kat-01.oxylion.net.pl:8080 random
 
-    ## # A tibble: 9 x 5
-    ##                   sponsor            name       country
-    ##                     <chr>           <chr>         <chr>
-    ## 1 Axcelx Technologies LLC  Somerville, MA United States
-    ## 2                 Comcast      Boston, MA United States
-    ## 3            Starry, Inc.      Boston, MA United States
-    ## 4 Axcelx Technologies LLC  Somerville, MA United States
-    ## 5 Norwood Light Broadband     Norwood, MA United States
-    ## 6       CCI - New England  Providence, RI United States
-    ## 7                 PirxNet         Gliwice        Poland
-    ## 8           Interoute VDC Los Angeles, CA United States
-    ## 9                   UNPAD         Bandung     Indonesia
-    ## # ... with 2 more variables: host <chr>, type <chr>
-
-``` r
 map_df(1:nrow(to_compare), ~{
   spd_download_test(to_compare[.x,], config=config, summarise=FALSE, timeout=30)
 }) -> dl_results_full
-```
 
-``` r
 mutate(dl_results_full, type=stri_trans_totitle(type)) %>%
   ggplot(aes(type, bw, fill=type)) +
   geom_quasirandom(aes(size=size, color=type), width=0.15, shape=21, stroke=0.25) +
@@ -258,7 +270,7 @@ mutate(dl_results_full, type=stri_trans_totitle(type)) %>%
   theme(legend.position="none")
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-10-1.png" width="672" />
+<img src="man/figures/README-moar-dl-tests-1.png" width="672" />
 
 ### Moar upload tests
 
@@ -273,26 +285,20 @@ bind_rows(
   distinct(.keep_all=TRUE) -> to_compare
 
 select(to_compare, sponsor, name, country, host, type)
-```
+## # A tibble: 6 x 5
+##   sponsor        name           country       host                                type   
+##   <chr>          <chr>          <chr>         <chr>                               <chr>  
+## 1 Otelco         Portland, ME   United States oak-speedtest.otelco.com:8080       closest
+## 2 netBlazr       Somerville, MA United States speed0.xcelx.net:8080               closest
+## 3 Comcast        Boston, MA     United States stosat-ndhm-01.sys.comcast.net:8080 closest
+## 4 Comcast        Boston, MA     United States stosat-ndhm-01.sys.comcast.net:8080 best   
+## 5 netBlazr       Somerville, MA United States speed0.xcelx.net:8080               best   
+## 6 BELD Broadband Braintree, MA  United States wotan.beld.net:8080                 best
 
-    ## # A tibble: 6 x 5
-    ##                   sponsor           name       country
-    ##                     <chr>          <chr>         <chr>
-    ## 1 Axcelx Technologies LLC Somerville, MA United States
-    ## 2                 Comcast     Boston, MA United States
-    ## 3            Starry, Inc.     Boston, MA United States
-    ## 4 Axcelx Technologies LLC Somerville, MA United States
-    ## 5 Norwood Light Broadband    Norwood, MA United States
-    ## 6       CCI - New England Providence, RI United States
-    ## # ... with 2 more variables: host <chr>, type <chr>
-
-``` r
 map_df(1:nrow(to_compare), ~{
   spd_upload_test(to_compare[.x,], config=config, summarise=FALSE, timeout=30)
 }) -> ul_results_full
-```
 
-``` r
 ggplot(ul_results_full, aes(x="Upload Test", y=bw)) +
   geom_quasirandom(aes(size=size, fill="col"), width=0.1, shape=21, stroke=0.25, color="#2b2b2b") +
   scale_y_continuous(expand=c(0,0.5)) +
@@ -304,19 +310,18 @@ ggplot(ul_results_full, aes(x="Upload Test", y=bw)) +
   theme(legend.position="none")
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-12-1.png" width="672" />
+<img src="man/figures/README-moar-ul-tests-1.png" width="672" />
 
 ## speedtest Metrics
 
 | Lang | \# Files |  (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
 | :--- | -------: | ---: | --: | ---: | ----------: | ---: | -------: | ---: |
-| HTML |        1 | 0.06 | 819 | 0.73 |          10 | 0.07 |        0 | 0.00 |
-| R    |       13 | 0.81 | 215 | 0.19 |          70 | 0.51 |      167 | 0.68 |
-| Rmd  |        1 | 0.06 |  64 | 0.06 |          49 | 0.36 |       78 | 0.32 |
-| make |        1 | 0.06 |  20 | 0.02 |           9 | 0.07 |        0 | 0.00 |
+| R    |       13 | 0.87 | 226 | 0.73 |          68 | 0.53 |      180 | 0.74 |
+| Rmd  |        1 | 0.07 |  64 | 0.21 |          51 | 0.40 |       63 | 0.26 |
+| make |        1 | 0.07 |  20 | 0.06 |           9 | 0.07 |        0 | 0.00 |
 
 ## Code of Conduct
 
-Please note that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its terms.
+Please note that this project is released with a Contributor Code of
+Conduct. By participating in this project you agree to abide by its
+terms.
