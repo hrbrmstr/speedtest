@@ -1,5 +1,4 @@
 ---
-title: "speedtest"
 output: rmarkdown::github_document
 editor_options: 
   chunk_output_type: console
@@ -12,13 +11,13 @@ hrbrpkghelpr::global_opts()
 hrbrpkghelpr::stinking_badges()
 ```
 
-# speedtest
+# speedtest 
 
 Tools to Test and Compare Internet Bandwidth Speeds
 
 ## Description
 
-The 'Ookla' 'Speedtest' site <http://beta.speedtest.net/about> provides interactive and programmatic services to test and compare bandwidth speeds from a source node on the Internet to thousands of test servers. Tools are provided to obtain test server lists, identify target servers for testing and performing speed/bandwidth tests.
+The 'Ookla' 'Speedtest' site <https://beta.speedtest.net/about> provides interactive and programmatic services to test and compare bandwidth speeds from a source node on the Internet to thousands of test servers. Tools are provided to obtain test server lists, identify target servers for testing and performing speed/bandwidth tests.
     
 ## What's Inside The Tin
 

@@ -1,5 +1,3 @@
-speedtest
-================
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -24,7 +22,7 @@ Tools to Test and Compare Internet Bandwidth Speeds
 
 ## Description
 
-The ‘Ookla’ ‘Speedtest’ site <http://beta.speedtest.net/about> provides
+The ‘Ookla’ ‘Speedtest’ site <https://beta.speedtest.net/about> provides
 interactive and programmatic services to test and compare bandwidth
 speeds from a source node on the Internet to thousands of test servers.
 Tools are provided to obtain test server lists, identify target servers
@@ -319,7 +317,7 @@ ggplot(ul_results_full, aes(x="Upload Test", y=bw)) +
 | Lang | \# Files |  (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
 | :--- | -------: | ---: | --: | ---: | ----------: | ---: | -------: | ---: |
 | R    |       13 | 0.87 | 226 | 0.73 |          68 | 0.53 |      180 | 0.74 |
-| Rmd  |        1 | 0.07 |  64 | 0.21 |          51 | 0.40 |       63 | 0.26 |
+| Rmd  |        1 | 0.07 |  64 | 0.21 |          51 | 0.40 |       62 | 0.26 |
 | make |        1 | 0.07 |  20 | 0.06 |           9 | 0.07 |        0 | 0.00 |
 
 ## Code of Conduct
