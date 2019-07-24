@@ -7,9 +7,11 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![Signed
 by](https://img.shields.io/badge/Keybase-Verified-brightgreen.svg)](https://keybase.io/hrbrmstr)
 ![Signed commit
-%](https://img.shields.io/badge/Signed_Commits-21.7%25-lightgrey.svg)
+%](https://img.shields.io/badge/Signed_Commits-100%25-lightgrey.svg)
 [![Linux build
 Status](https://travis-ci.org/hrbrmstr/speedtest.svg?branch=master)](https://travis-ci.org/hrbrmstr/speedtest)
+[![Windows build
+status](https://ci.appveyor.com/api/projects/status/github/hrbrmstr/speedtest?svg=true)](https://ci.appveyor.com/project/hrbrmstr/speedtest)
 [![Coverage
 Status](https://codecov.io/gh/hrbrmstr/speedtest/branch/master/graph/badge.svg)](https://codecov.io/gh/hrbrmstr/speedtest)
 ![Minimal R
