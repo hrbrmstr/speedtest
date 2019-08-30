@@ -2,7 +2,7 @@ Package: speedtest
 Type: Package
 Title: Tools to Test and Compare Internet Bandwidth Speeds
 Version: 0.2.0
-Date: 2019-07-24
+Date: 2019-08-31
 Authors@R: c( person("Bob", "Rudis", email = "bob@rud.is",
       role = c("aut", "cre"), comment = c(ORCID =
       "0000-0001-5670-2640")), person("Bryce", "Mecum",
