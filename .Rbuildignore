@@ -15,4 +15,5 @@
 ^LICENSE\.md$
 ^Makefile$
 ^appveyor\.yml$
-
+^README\.Rmd$
+^README\.md$
