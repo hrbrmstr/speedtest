@@ -13,7 +13,7 @@ performs download & upload tests and returs the best result.
 \details{
 Make a command-line alias or executable with:
 
-\code{Rscript --quiet -e 'speedtest::spd_test()'}
+\verb{Rscript --quiet -e 'speedtest::spd_test()'}
 }
 \examples{
 \dontrun{

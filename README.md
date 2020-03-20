@@ -32,6 +32,8 @@ for testing and performing speed/bandwidth tests.
 
 The following functions are implemented:
 
+  - `install_speedtest_cli`: Provides instructions for installing the
+    official speedtest CLI application
   - `nice_speed`: Convert a test speed, in Mbits/s, to its string
     representation along with appropriate units for the magnitude of the
     test speed
@@ -47,6 +49,8 @@ The following functions are implemented:
   - `spd_servers`: Retrieve a list of SpeedTest servers
   - `spd_test`: Test your internet speed/bandwidth
   - `spd_upload_test`: Perform an upload speed/bandwidth test
+  - `speedtest_cli`: Perform an official Ookla Speed Test via their
+    command line tools
 
 ## Make a CLI utility
 
@@ -83,7 +87,7 @@ we shld” kinda thing. Ones with exclamation marks are essentials.
 ## Installation
 
 ``` r
-install.packages("speedtest", repos = "https://cinc.rud.is")
+install.packages("speedtest", repos = c("https://cinc.rud.is", "https://cloud.r-project.org/"))
 # or
 remotes::install_git("https://git.rud.is/hrbrmstr/speedtest.git")
 # or
@@ -110,7 +114,7 @@ library(tidyverse)
 
 # current verison
 packageVersion("speedtest")
-## [1] '0.2.0'
+## [1] '0.3.0'
 ```
 
 ### Download Speed
@@ -129,27 +133,27 @@ only_the_best_severs <- spd_best_servers(closest_servers, config)
 glimpse(spd_download_test(closest_servers[1,], config=config))
 ## Observations: 1
 ## Variables: 15
-## $ url     <chr> "http://oak-speedtest.otelco.com:8080/speedtest/upload.php"
-## $ lat     <dbl> 43.6614
-## $ lng     <dbl> -70.2558
-## $ name    <chr> "Portland, ME"
+## $ url     <chr> "http://speedtest.peregrinenetworks.net:8080/speedtest/upload.php"
+## $ lat     <dbl> 42.9956
+## $ lng     <dbl> -71.4548
+## $ name    <chr> "Manchester, NH"
 ## $ country <chr> "United States"
 ## $ cc      <chr> "US"
-## $ sponsor <chr> "Otelco"
-## $ id      <chr> "1037"
-## $ host    <chr> "oak-speedtest.otelco.com:8080"
-## $ url2    <chr> "http://66.181.127.42/speedtest/upload.php"
-## $ min     <dbl> 12.16723
-## $ mean    <dbl> 14.91807
-## $ median  <dbl> 14.57376
-## $ max     <dbl> 17.30854
-## $ sd      <dbl> 1.736132
+## $ sponsor <chr> "Peregrine Networks"
+## $ id      <chr> "30644"
+## $ host    <chr> "speedtest.peregrinenetworks.net:8080"
+## $ url2    <chr> NA
+## $ min     <dbl> 17.00748
+## $ mean    <dbl> 63.20918
+## $ median  <dbl> 66.31945
+## $ max     <dbl> 81.70783
+## $ sd      <dbl> 18.60229
 
 glimpse(spd_download_test(only_the_best_severs[1,], config=config))
 ## Observations: 1
 ## Variables: 17
-## $ total_time     <dbl> 0.075129
-## $ retrieval_time <dbl> 2.8e-05
+## $ total_time     <dbl> 0.082232
+## $ retrieval_time <dbl> 3.2e-05
 ## $ url            <chr> "http://stosat-ndhm-01.sys.comcast.net:8080/speedtest/upload.php"
 ## $ lat            <dbl> 42.3578
 ## $ lng            <dbl> -71.0617
@@ -160,11 +164,11 @@ glimpse(spd_download_test(only_the_best_severs[1,], config=config))
 ## $ id             <chr> "1774"
 ## $ host           <chr> "stosat-ndhm-01.sys.comcast.net:8080"
 ## $ url2           <chr> "http://a-stosat-ndhm-01.sys.comcast.net/speedtest/upload.php"
-## $ min            <dbl> 14.49186
-## $ mean           <dbl> 17.68452
-## $ median         <dbl> 16.75617
-## $ max            <dbl> 24.3737
-## $ sd             <dbl> 2.987197
+## $ min            <dbl> 10.76603
+## $ mean           <dbl> 38.85852
+## $ median         <dbl> 39.13755
+## $ max            <dbl> 70.70089
+## $ sd             <dbl> 20.80209
 ```
 
 ### Individual upload tests
@@ -173,8 +177,8 @@ glimpse(spd_download_test(only_the_best_severs[1,], config=config))
 glimpse(spd_upload_test(only_the_best_severs[1,], config=config))
 ## Observations: 1
 ## Variables: 17
-## $ total_time     <dbl> 0.075129
-## $ retrieval_time <dbl> 2.8e-05
+## $ total_time     <dbl> 0.082232
+## $ retrieval_time <dbl> 3.2e-05
 ## $ url            <chr> "http://stosat-ndhm-01.sys.comcast.net:8080/speedtest/upload.php"
 ## $ lat            <dbl> 42.3578
 ## $ lng            <dbl> -71.0617
@@ -185,30 +189,30 @@ glimpse(spd_upload_test(only_the_best_severs[1,], config=config))
 ## $ id             <chr> "1774"
 ## $ host           <chr> "stosat-ndhm-01.sys.comcast.net:8080"
 ## $ url2           <chr> "http://a-stosat-ndhm-01.sys.comcast.net/speedtest/upload.php"
-## $ min            <dbl> 9.951216
-## $ mean           <dbl> 20.33949
-## $ median         <dbl> 22.11265
-## $ max            <dbl> 23.4545
-## $ sd             <dbl> 5.148238
+## $ min            <dbl> 8.765322
+## $ mean           <dbl> 18.67036
+## $ median         <dbl> 20.3484
+## $ max            <dbl> 23.0133
+## $ sd             <dbl> 5.342232
 
 glimpse(spd_upload_test(closest_servers[1,], config=config))
 ## Observations: 1
 ## Variables: 15
-## $ url     <chr> "http://oak-speedtest.otelco.com:8080/speedtest/upload.php"
-## $ lat     <dbl> 43.6614
-## $ lng     <dbl> -70.2558
-## $ name    <chr> "Portland, ME"
+## $ url     <chr> "http://speedtest.peregrinenetworks.net:8080/speedtest/upload.php"
+## $ lat     <dbl> 42.9956
+## $ lng     <dbl> -71.4548
+## $ name    <chr> "Manchester, NH"
 ## $ country <chr> "United States"
 ## $ cc      <chr> "US"
-## $ sponsor <chr> "Otelco"
-## $ id      <chr> "1037"
-## $ host    <chr> "oak-speedtest.otelco.com:8080"
-## $ url2    <chr> "http://66.181.127.42/speedtest/upload.php"
-## $ min     <dbl> 5.646166
-## $ mean    <dbl> 16.96393
-## $ median  <dbl> 19.76833
-## $ max     <dbl> 22.18757
-## $ sd      <dbl> 6.542608
+## $ sponsor <chr> "Peregrine Networks"
+## $ id      <chr> "30644"
+## $ host    <chr> "speedtest.peregrinenetworks.net:8080"
+## $ url2    <chr> NA
+## $ min     <dbl> 5.640102
+## $ mean    <dbl> 18.29085
+## $ median  <dbl> 20.99412
+## $ max     <dbl> 21.7017
+## $ sd      <dbl> 6.299546
 ```
 
 ### Moar download tests
@@ -241,17 +245,17 @@ bind_rows(
 
 select(to_compare, sponsor, name, country, host, type)
 ## # A tibble: 9 x 5
-##   sponsor             name           country            host                                 type   
-##   <chr>               <chr>          <chr>              <chr>                                <chr>  
-## 1 Otelco              Portland, ME   United States      oak-speedtest.otelco.com:8080        closest
-## 2 netBlazr            Somerville, MA United States      speed0.xcelx.net:8080                closest
-## 3 Comcast             Boston, MA     United States      stosat-ndhm-01.sys.comcast.net:8080  closest
-## 4 Comcast             Boston, MA     United States      stosat-ndhm-01.sys.comcast.net:8080  best   
-## 5 netBlazr            Somerville, MA United States      speed0.xcelx.net:8080                best   
-## 6 BELD Broadband      Braintree, MA  United States      wotan.beld.net:8080                  best   
-## 7 LLC Trans Analitika Novaya Usman   Russian Federation speedtest-1.cnetvrn.ru:8080          random 
-## 8 VEGA Kharkiv        Kharkiv        Ukraine            speedtest.vega.com.ua:8080           random 
-## 9 Oxylion S.A         Katowice       Poland             speedtest-kat-01.oxylion.net.pl:8080 random
+##   sponsor              name           country       host                                 type   
+##   <chr>                <chr>          <chr>         <chr>                                <chr>  
+## 1 Peregrine Networks   Manchester, NH United States speedtest.peregrinenetworks.net:8080 closest
+## 2 Otelco               Portland, ME   United States oak-speedtest.otelco.com:8080        closest
+## 3 netBlazr             Somerville, MA United States speed0.xcelx.net:8080                closest
+## 4 Comcast              Boston, MA     United States stosat-ndhm-01.sys.comcast.net:8080  best   
+## 5 netBlazr             Somerville, MA United States speed0.xcelx.net:8080                best   
+## 6 Peregrine Networks   Manchester, NH United States speedtest.peregrinenetworks.net:8080 best   
+## 7 Studenten Net Twente Enschede       Netherlands   ookla.snt.utwente.nl:8080            random 
+## 8 MIIT                 Kiev           Ukraine       speedtest.miit.ua:8080               random 
+## 9 Netcity              Kielce         Poland        speedtest.netcity.pl:8080            random
 
 map_df(1:nrow(to_compare), ~{
   spd_download_test(to_compare[.x,], config=config, summarise=FALSE, timeout=30)
@@ -286,14 +290,14 @@ bind_rows(
 
 select(to_compare, sponsor, name, country, host, type)
 ## # A tibble: 6 x 5
-##   sponsor        name           country       host                                type   
-##   <chr>          <chr>          <chr>         <chr>                               <chr>  
-## 1 Otelco         Portland, ME   United States oak-speedtest.otelco.com:8080       closest
-## 2 netBlazr       Somerville, MA United States speed0.xcelx.net:8080               closest
-## 3 Comcast        Boston, MA     United States stosat-ndhm-01.sys.comcast.net:8080 closest
-## 4 Comcast        Boston, MA     United States stosat-ndhm-01.sys.comcast.net:8080 best   
-## 5 netBlazr       Somerville, MA United States speed0.xcelx.net:8080               best   
-## 6 BELD Broadband Braintree, MA  United States wotan.beld.net:8080                 best
+##   sponsor            name           country       host                                 type   
+##   <chr>              <chr>          <chr>         <chr>                                <chr>  
+## 1 Peregrine Networks Manchester, NH United States speedtest.peregrinenetworks.net:8080 closest
+## 2 Otelco             Portland, ME   United States oak-speedtest.otelco.com:8080        closest
+## 3 netBlazr           Somerville, MA United States speed0.xcelx.net:8080                closest
+## 4 Comcast            Boston, MA     United States stosat-ndhm-01.sys.comcast.net:8080  best   
+## 5 netBlazr           Somerville, MA United States speed0.xcelx.net:8080                best   
+## 6 Peregrine Networks Manchester, NH United States speedtest.peregrinenetworks.net:8080 best
 
 map_df(1:nrow(to_compare), ~{
   spd_upload_test(to_compare[.x,], config=config, summarise=FALSE, timeout=30)
@@ -316,9 +320,9 @@ ggplot(ul_results_full, aes(x="Upload Test", y=bw)) +
 
 | Lang | \# Files |  (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
 | :--- | -------: | ---: | --: | ---: | ----------: | ---: | -------: | ---: |
-| R    |       13 | 0.87 | 226 | 0.73 |          68 | 0.53 |      180 | 0.74 |
-| Rmd  |        1 | 0.07 |  64 | 0.21 |          51 | 0.40 |       62 | 0.26 |
-| make |        1 | 0.07 |  20 | 0.06 |           9 | 0.07 |        0 | 0.00 |
+| R    |       15 | 0.88 | 286 | 0.77 |          90 | 0.60 |      192 | 0.76 |
+| Rmd  |        1 | 0.06 |  64 | 0.17 |          51 | 0.34 |       62 | 0.24 |
+| make |        1 | 0.06 |  20 | 0.05 |           9 | 0.06 |        0 | 0.00 |
 
 ## Code of Conduct
 

@@ -4,8 +4,13 @@
 \alias{spd_download_test}
 \title{Perform a download speed/bandwidth test}
 \usage{
-spd_download_test(server, config = NULL, summarise = TRUE,
-  timeout = 60, .progress = "dplyr")
+spd_download_test(
+  server,
+  config = NULL,
+  summarise = TRUE,
+  timeout = 60,
+  .progress = "dplyr"
+)
 }
 \arguments{
 \item{server}{a data frame row from one of the functions that retrieves or

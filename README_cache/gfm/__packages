@@ -12,3 +12,5 @@ purrr
 dplyr
 stringr
 forcats
+bit
+bit64

@@ -11,7 +11,7 @@
 #' @docType package
 #' @author Bob Rudis (bob@@rud.is)
 #' @import purrr xml2 httr cli crayon
-#' @importFrom utils globalVariables
+#' @importFrom utils globalVariables browseURL
 #' @importFrom tibble tibble
 #' @importFrom dplyr left_join arrange filter select summarise mutate
 #' @importFrom jsonlite fromJSON
@@ -19,4 +19,5 @@
 #' @importFrom pingr ping
 #' @importFrom urltools domain
 #' @importFrom stats median sd
+#' @importFrom scales label_number_si
 "_PACKAGE"
